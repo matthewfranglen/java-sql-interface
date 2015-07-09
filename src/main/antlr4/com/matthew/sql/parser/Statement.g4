@@ -1,4 +1,4 @@
-grammar statement;
+grammar Statement;
 
 root
 : entry
