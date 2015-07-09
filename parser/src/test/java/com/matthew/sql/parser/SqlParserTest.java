@@ -18,5 +18,6 @@ public class SqlParserTest {
         SqlStatement statement = parser.parse(source);
 
         assertEquals(statement.getName(), "sample statement");
+        assertEquals(statement.getStatement(), "SELECT * FROM table LIMIT 1;");
     }
 }

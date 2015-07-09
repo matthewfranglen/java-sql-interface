@@ -13,8 +13,8 @@ public class SqlStatement {
         checkArgument(! Strings.isNullOrEmpty(name), "name is null or blank");
         checkArgument(! Strings.isNullOrEmpty(statement), "statement is null or blank");
 
-        this.name = name;
-        this.statement = statement;
+        this.name = name.trim();
+        this.statement = statement.trim();
     }
 
     public String getName() {
