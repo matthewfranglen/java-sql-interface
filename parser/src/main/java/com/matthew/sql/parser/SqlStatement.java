@@ -4,14 +4,14 @@ import static com.google.common.base.Preconditions.checkArgument;
 
 import com.google.common.base.Strings;
 
-public class Statement {
+public class SqlStatement {
 
     private final String name;
     private final String statement;
 
-    public Statement(String name, String statement) {
-        checkArgument(Strings.isNullOrEmpty(name), "name is null or blank");
-        checkArgument(Strings.isNullOrEmpty(statement), "statement is null or blank");
+    public SqlStatement(String name, String statement) {
+        checkArgument(! Strings.isNullOrEmpty(name), "name is null or blank");
+        checkArgument(! Strings.isNullOrEmpty(statement), "statement is null or blank");
 
         this.name = name;
         this.statement = statement;
@@ -38,8 +38,8 @@ public class Statement {
             this.statement = statement;
         }
 
-        public Statement build() {
-            return new Statement(name, statement);
+        public SqlStatement build() {
+            return new SqlStatement(name, statement);
         }
     }
 }

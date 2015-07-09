@@ -17,7 +17,7 @@ name_line
 ;
 
 comment_line
-: COMMENT CHAR* EOL
+: COMMENT ( CHAR | WS )* EOL
 ;
 
 whitespace_line
@@ -45,13 +45,17 @@ COMMENT
 ;
 
 CHAR
-: [^ \t\r\n]
+: ~(' ' | '\t' | '\r' | '\n')
 ;
 
 WS
-: [ \t]
+: ' '
+| '\t'
 ;
 
 EOL
-: [\r\n]
+: '\r'
+| '\n'
+| '\r\n'
+| '\n\r'
 ;
