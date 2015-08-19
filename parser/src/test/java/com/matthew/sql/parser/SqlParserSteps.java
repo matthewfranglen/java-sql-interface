@@ -5,14 +5,27 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
+import org.mockito.InjectMocks;
+import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
+
+import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
 public class SqlParserSteps {
 
+    @Spy private SqlParser parser;
+    @InjectMocks private SqlStatementLoader loader;
+
     private String resource;
     private SqlStatement statement;
+
+    @Before
+    public void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Given("^the resource \"(.*)\"$")
     public void givenTheResource(String file) throws IOException {
@@ -21,7 +34,7 @@ public class SqlParserSteps {
 
     @When("^the resource is loaded as a statement$")
     public void whenTheResourceIsLoadedAsAStatement() throws IOException {
-        statement = new SqlParser().parseResource(resource);
+        statement = loader.parseResource(resource);
     }
 
     @Then("^the loaded statement argument count is (\\d+)$")
