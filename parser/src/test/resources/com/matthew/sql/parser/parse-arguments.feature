@@ -7,8 +7,8 @@ Feature: Can read SQL Statement Argument
         Then the loaded statement argument count is <arguments>
 
     Examples:
-        | file                        | arguments |
-        | statement-by-name.sql       | 0         |
-        | statement-with-argument.sql | 1         |
-        | statement-with-comment.sql  | 0         |
-        | statement.sql               | 0         |
+        | file                                   | arguments |
+        | statements/statement-by-name.sql       | 0         |
+        | statements/statement-with-argument.sql | 1         |
+        | statements/statement-with-comment.sql  | 0         |
+        | statements/statement.sql               | 0         |

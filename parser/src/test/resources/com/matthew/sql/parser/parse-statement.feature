@@ -7,8 +7,8 @@ Feature: Can read SQL Statement Body
         Then the loaded statement body is "SELECT * FROM table LIMIT 1;"
 
     Examples:
-        | file                        |
-        | statement-by-name.sql       |
-        | statement-with-argument.sql |
-        | statement-with-comment.sql  |
-        | statement.sql               |
+        | file                                   |
+        | statements/statement-by-name.sql       |
+        | statements/statement-with-argument.sql |
+        | statements/statement-with-comment.sql  |
+        | statements/statement.sql               |
