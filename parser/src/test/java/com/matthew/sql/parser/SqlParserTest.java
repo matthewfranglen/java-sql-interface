@@ -1,23 +1,12 @@
 package com.matthew.sql.parser;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.runner.RunWith;
 
-import java.io.IOException;
+import cucumber.api.CucumberOptions;
+import cucumber.api.junit.Cucumber;
 
-import org.junit.Test;
-
-import com.google.common.base.Charsets;
-import com.google.common.io.Resources;
-
+@RunWith(Cucumber.class)
+@CucumberOptions(plugin = {"pretty", "html:target/cucumber"})
 public class SqlParserTest {
 
-    @Test
-    public void testParser() throws IOException {
-        String source = Resources.toString(Resources.getResource("statement.sql"), Charsets.UTF_8);
-        SqlParser parser = new SqlParser();
-        SqlStatement statement = parser.parse(source);
-
-        assertEquals(statement.getName(), "sample statement");
-        assertEquals(statement.getStatement(), "SELECT * FROM table LIMIT 1;");
-    }
 }
