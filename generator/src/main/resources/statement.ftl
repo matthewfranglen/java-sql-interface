@@ -2,6 +2,18 @@
 package ${package};
 </#if>
 
-public class ${shortName} 
-    private final String statement${statement.shortName} = "${statement.statement}";
+import com.matthew.sql.handler.AbstractStatement;
 
+public class ${shortName} extends AbstractStatement {
+
+    private static final String statement = "${statement.statement}";
+
+    public ${shortName}(NamedParameterJdbcTemplate template) {
+        super(template);
+    }
+
+    protected String getStatement() {
+        return statement;
+    }
+
+}

@@ -1,36 +1,20 @@
-package com.matthew.sql;
+package com.matthew.sql.generated;
 
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import com.matthew.sql.handler.AbstractStatementHandler;
 
-public class SqlStatementHandler {
-
-    private final DataSource dataSource;
+public class SqlStatementHandler extends AbstractStatementHandler {
 
     public SqlStatementHandler(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
-    private NamedParameterJdbcTemplate makeTemplate() {
-        return new NamedParameterJdbcTemplate(dataSource);
+        super(dataSource);
     }
 
     <#list statements as statement>
 
-    private final String statement${statement.shortName} = "${statement.statement}";
-
-    public ${statement.fullName} execute${statement.shortName}() {
-
+    public ${statement.name.full} make${statement.name.short}() {
+        return new ${statement.name.full}(getTemplate());
     }
-
-    public ${statement.fullName} query${statement.shortName}() {
-
-    }
-
-    public ${statement.fullName} update${statement.shortName}() {
-
-    }
-
 
     </#list>
 
