@@ -6,14 +6,10 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 public abstract class AbstractStatementHandler {
 
-    private final DataSource dataSource;
+    protected final NamedParameterJdbcTemplate template;
 
     public AbstractStatementHandler(DataSource dataSource) {
-        this.dataSource = dataSource;
-    }
-
-    protected NamedParameterJdbcTemplate makeTemplate() {
-        return new NamedParameterJdbcTemplate(dataSource);
+        template = new NamedParameterJdbcTemplate(dataSource);
     }
 
 }
