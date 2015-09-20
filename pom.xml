@@ -25,6 +25,8 @@
 
     <modules>
         <module>parser</module>
+        <module>handler</module>
+        <module>generator</module>
     </modules>
 
 </project>
