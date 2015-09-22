@@ -4,11 +4,11 @@ package ${package};
 
 import com.matthew.sql.handler.AbstractStatement;
 
-public class ${shortName} extends AbstractStatement {
+public class ${name.short} extends AbstractStatement {
 
-    private static final String statement = "${statement.statement}";
+    private static final String statement = "${statement}";
 
-    public ${shortName}(NamedParameterJdbcTemplate template) {
+    public ${name.short}(NamedParameterJdbcTemplate template) {
         super(template);
     }
 
