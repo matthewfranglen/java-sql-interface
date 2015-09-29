@@ -1,7 +1,6 @@
 package com.matthew.sql.parser;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
 import java.io.IOException;
 
@@ -9,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 
+import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -39,7 +39,7 @@ public class SqlParserSteps {
 
     @Then("^the loaded statement argument count is (\\d+)$")
     public void thenTheLoadedStatementArgumentCountIs(int count) {
-        fail("TBC");
+        throw new PendingException();
     }
 
     @Then("^the loaded statement body is \"(.*)\"$")
