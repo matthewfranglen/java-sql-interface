@@ -71,6 +71,8 @@ public class CodeGenerator {
         Map<String, Object> parameters = new HashMap<>();
 
         parameters.put("name", makeStatementName(statement));
+        parameters.put("hasPackage", false);
+        parameters.put("package", null);
         parameters.put("statement", statement.getStatement());
 
         return parameters;
