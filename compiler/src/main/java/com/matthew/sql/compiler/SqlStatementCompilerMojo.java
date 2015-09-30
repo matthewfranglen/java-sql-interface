@@ -20,8 +20,10 @@ import com.matthew.sql.generator.CodeGenerator;
 import com.matthew.sql.parser.SqlStatement;
 import com.matthew.sql.parser.SqlStatementLoader;
 
-@Mojo(name = "compiler", defaultPhase = LifecyclePhase.VALIDATE)
+@Mojo(name = "compiler", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
 public class SqlStatementCompilerMojo extends AbstractMojo {
+
+    private static final String OUTPUT_FOLDER = "target/generated-sources/sql-statements";
 
     @Parameter
     private FileSet statements;
@@ -98,19 +100,19 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
     }
 
     private void writeStatementCode(GeneratedCode code) {
-        String path = String.format("target/generated-sources/%s/%s.java", code.getStatement().getPath(), code.getStatement().getName());
+        String path = String.format("%s/%s/%s.java", OUTPUT_FOLDER, code.getStatement().getPath(), code.getStatement().getName());
         File file = new File(path);
 
         write(file, code.getCode());
-        getLog().info(code.getCode());
+        getLog().info(String.format("Written Statement: %s.%s", code.getStatement().getPackage(), code.getStatement().getName()));
     }
 
     private void writeStatementHandlerCode(Collection<SqlStatement> statements) throws Exception {
-        File file = new File("target/generated-sources/com/matthew/sql/generated/StatementHandler.java");
+        File file = new File(String.format("%s/com/matthew/sql/generated/StatementHandler.java", OUTPUT_FOLDER));
         String code = generator.generateStatementHandlerCode(statements);
 
         write(file, code);
-        getLog().info(code);
+        getLog().info("Written Statement Handler: com.matthew.sql.generated.StatementHandler");
     }
 
     private void write(File file, String content) {
