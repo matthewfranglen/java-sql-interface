@@ -8,17 +8,17 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 
-@Component
 public class SqlStatementLoader {
 
-    @Autowired private SqlParser parser;
+    private SqlParser parser;
+
+    public SqlStatementLoader() {
+        parser = new SqlParser();
+    }
 
     public SqlStatement parseResource(String resource) throws IOException {
         String directoryPath, fileName;

@@ -4,10 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 
-import org.mockito.InjectMocks;
-import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
-
 import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
@@ -16,15 +12,14 @@ import cucumber.api.java.en.When;
 
 public class SqlParserSteps {
 
-    @Spy private SqlParser parser;
-    @InjectMocks private SqlStatementLoader loader;
+    private SqlStatementLoader loader;
 
     private String resource;
     private SqlStatement statement;
 
     @Before
     public void setUp() {
-        MockitoAnnotations.initMocks(this);
+        loader = new SqlStatementLoader();
     }
 
     @Given("^the resource \"(.*)\"$")

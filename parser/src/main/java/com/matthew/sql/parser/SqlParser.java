@@ -2,12 +2,10 @@ package com.matthew.sql.parser;
 
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.springframework.stereotype.Component;
 
 import com.matthew.sql.parser.generated.StatementLexer;
 import com.matthew.sql.parser.generated.StatementParser;
 
-@Component
 public class SqlParser {
 
     public SqlStatement.Builder parse(String content) {
