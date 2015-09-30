@@ -11,12 +11,8 @@ public class StatementBuildingListener extends StatementBaseListener {
         builder = new SqlStatement.Builder();
     }
 
-    public SqlStatement getStatement() {
-        return builder.build();
-    }
-
-    public void setName(String name) {
-        builder.setName(name);
+    public SqlStatement.Builder getBuilder() {
+        return builder;
     }
 
     @Override

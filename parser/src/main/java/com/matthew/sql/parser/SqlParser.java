@@ -21,19 +21,24 @@ import com.matthew.sql.parser.generated.StatementParser;
 public class SqlParser {
 
     public SqlStatement parse(File file) throws IOException {
-        return parse(toName(file), Files.toString(file, Charsets.UTF_8));
+        String name = toName(file);
+        String content = Files.toString(file, Charsets.UTF_8);
+        SqlStatement.Builder builder = parse(content);
+
+        builder.setName(name);
+
+        return builder.build();
     }
 
-    public SqlStatement parse(String name, String content) {
+    private SqlStatement.Builder parse(String content) {
         StatementLexer lexer = new StatementLexer(new ANTLRInputStream(content));
         StatementParser parser = new StatementParser(new CommonTokenStream(lexer));
         StatementBuildingListener listener = new StatementBuildingListener();
 
-        listener.setName(name);
         parser.addParseListener(listener);
         parser.root();
 
-        return listener.getStatement();
+        return listener.getBuilder();
     }
 
     public String toName(File file) {
