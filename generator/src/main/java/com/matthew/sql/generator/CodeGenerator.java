@@ -81,7 +81,7 @@ public class CodeGenerator {
     private Map<String, ?> makeStatementName(SqlStatement statement) {
         Map<String, String> name = new HashMap<>();
 
-        name.put("full", statement.getName());
+        name.put("full", statement.getPackage() + "." + statement.getName());
         name.put("short", statement.getName());
 
         return name;

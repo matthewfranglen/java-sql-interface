@@ -11,8 +11,8 @@ public class SqlStatementHandler extends AbstractStatementHandler {
     }
 
     
-    public Statement makeStatement() {
-        return new Statement(getTemplate());
+    public statements.Statement makeStatement() {
+        return new statements.Statement(getTemplate());
     }
 
 
