@@ -2,6 +2,7 @@
 package ${package};
 </#if>
 
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import com.matthew.sql.handler.AbstractStatement;
 
 public class ${name.short} extends AbstractStatement {

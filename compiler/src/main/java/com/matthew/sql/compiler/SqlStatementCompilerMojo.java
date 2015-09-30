@@ -108,11 +108,11 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
     }
 
     private void writeStatementHandlerCode(Collection<SqlStatement> statements) throws Exception {
-        File file = new File(String.format("%s/com/matthew/sql/generated/StatementHandler.java", OUTPUT_FOLDER));
+        File file = new File(String.format("%s/com/matthew/sql/generated/SqlStatementHandler.java", OUTPUT_FOLDER));
         String code = generator.generateStatementHandlerCode(statements);
 
         write(file, code);
-        getLog().info("Written Statement Handler: com.matthew.sql.generated.StatementHandler");
+        getLog().info("Written Statement Handler: com.matthew.sql.generated.SqlStatementHandler");
     }
 
     private void write(File file, String content) {
