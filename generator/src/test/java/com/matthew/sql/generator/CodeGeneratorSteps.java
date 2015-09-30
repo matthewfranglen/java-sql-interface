@@ -26,6 +26,7 @@ public class CodeGeneratorSteps {
     @InjectMocks private SqlStatementLoader loader;
 
     private String name;
+    private String path;
     private String statement;
     private String code;
 
@@ -39,6 +40,11 @@ public class CodeGeneratorSteps {
         this.name = name;
     }
 
+    @Given("^the path \"(.*)\"$")
+    public void givenThePath(String path) throws IOException {
+        this.path = path;
+    }
+
     @Given("^the statement \"(.*)\"$")
     public void givenTheStatement(String file) throws IOException {
         statement = readResource(file);
@@ -46,13 +52,13 @@ public class CodeGeneratorSteps {
 
     @When("^the statement is converted to a statement handler class$")
     public void whenTheStatementIsConvertedToAStatementHandlerClass() throws Exception {
-        SqlStatement statementObject = new SqlStatement(name, statement);
+        SqlStatement statementObject = new SqlStatement(name, path, statement);
         code = new CodeGenerator().generateStatementHandlerCode(Arrays.asList(statementObject));
     }
 
     @When("^the statement is converted to a statement class$")
     public void whenTheStatementIsConvertedToAStatementClass() throws Exception {
-        SqlStatement statementObject = new SqlStatement(name, statement);
+        SqlStatement statementObject = new SqlStatement(name, path, statement);
         code = new CodeGenerator().generateStatementCode(statementObject);
     }
 
