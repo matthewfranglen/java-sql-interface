@@ -15,8 +15,8 @@ import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.FileUtils;
 
 import com.matthew.sql.generator.CodeGenerator;
-import com.matthew.sql.parser.SqlParser;
 import com.matthew.sql.parser.SqlStatement;
+import com.matthew.sql.parser.SqlStatementLoader;
 
 @Mojo(name = "compiler", defaultPhase = LifecyclePhase.VALIDATE)
 public class SqlStatementCompilerMojo extends AbstractMojo {
@@ -24,11 +24,11 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
     @Parameter
     private FileSet statements;
 
-    private final SqlParser parser;
+    private final SqlStatementLoader loader;
     private final CodeGenerator generator;
 
     public SqlStatementCompilerMojo() {
-        parser = new SqlParser();
+        loader = new SqlStatementLoader();
         generator = new CodeGenerator();
     }
 
@@ -47,13 +47,14 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
     }
 
     private Collection<SqlStatement> getStatements() throws IOException {
-        return getStatementFiles().stream()
-            .map(this::parseStatementFile)
+        File rootDirectory = new File(statements.getDirectory());
+
+        return getStatementFiles(rootDirectory).stream()
+            .map((File file) -> parseStatementFile(rootDirectory, file))
             .collect(Collectors.toList());
     }
 
-    private Collection<File> getStatementFiles() throws IOException {
-        File directory = new File(statements.getDirectory());
+    private Collection<File> getStatementFiles(File directory) throws IOException {
         String includes = statements.getIncludes()
             .stream()
             .collect(Collectors.joining(","));
@@ -64,9 +65,9 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
         return FileUtils.getFiles(directory, includes, excludes);
     }
 
-    private SqlStatement parseStatementFile(File statement) {
+    private SqlStatement parseStatementFile(File rootDirectory, File statement) {
         try {
-            return parser.parse(statement);
+            return loader.parseFile(rootDirectory, statement);
         }
         catch (RuntimeException e) {
             throw e;
