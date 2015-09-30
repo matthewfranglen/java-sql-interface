@@ -14,6 +14,8 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.codehaus.plexus.util.FileUtils;
 
+import com.google.common.base.Charsets;
+import com.google.common.io.Files;
 import com.matthew.sql.generator.CodeGenerator;
 import com.matthew.sql.parser.SqlStatement;
 import com.matthew.sql.parser.SqlStatementLoader;
@@ -96,13 +98,29 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
     }
 
     private void writeStatementCode(GeneratedCode code) {
+        String path = String.format("target/generated-sources/%s/%s.java", code.getStatement().getPath(), code.getStatement().getName());
+        File file = new File(path);
+
+        write(file, code.getCode());
         getLog().info(code.getCode());
     }
 
     private void writeStatementHandlerCode(Collection<SqlStatement> statements) throws Exception {
+        File file = new File("target/generated-sources/com/matthew/sql/generated/StatementHandler.java");
         String code = generator.generateStatementHandlerCode(statements);
 
+        write(file, code);
         getLog().info(code);
+    }
+
+    private void write(File file, String content) {
+        try {
+            file.getParentFile().mkdirs();
+            Files.write(content, file, Charsets.UTF_8);
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
