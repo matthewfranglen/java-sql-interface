@@ -57,7 +57,7 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
         String includes = statements.getIncludes()
             .stream()
             .collect(Collectors.joining(","));
-        String excludes = statements.getIncludes()
+        String excludes = statements.getExcludes()
             .stream()
             .collect(Collectors.joining(","));
 
