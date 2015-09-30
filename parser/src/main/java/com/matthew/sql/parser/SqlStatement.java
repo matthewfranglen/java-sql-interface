@@ -17,6 +17,10 @@ public class SqlStatement {
         checkArgument(! Strings.isNullOrEmpty(path), "path is null or blank");
         checkArgument(! Strings.isNullOrEmpty(statement), "statement is null or blank");
 
+        if (path.startsWith("/")) {
+            path = path.substring(1);
+        }
+
         this.name = name.trim();
         this.path = path.trim();
         this.statement = statement.trim();

@@ -7,8 +7,8 @@ Feature: Can read SQL Statement Name
         Then the loaded statement name is "<name>"
 
     Examples:
-        | file                                   | name                             |
-        | statements/statement-by-name.sql       | statements.StatementByName       |
-        | statements/statement-with-argument.sql | statements.StatementWithArgument |
-        | statements/statement-with-comment.sql  | statements.StatementWithComment  |
-        | statements/statement.sql               | statements.Statement             |
+        | file                                   | name                  |
+        | statements/statement-by-name.sql       | StatementByName       |
+        | statements/statement-with-argument.sql | StatementWithArgument |
+        | statements/statement-with-comment.sql  | StatementWithComment  |
+        | statements/statement.sql               | Statement             |

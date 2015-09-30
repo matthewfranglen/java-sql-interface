@@ -52,4 +52,9 @@ public class SqlParserSteps {
         assertEquals(name, statement.getName());
     }
 
+    @Then("^the loaded statement package is \"(.*)\"$")
+    public void thenTheLoadedStatementPackageIs(String _package) {
+        assertEquals(_package, statement.getPackage());
+    }
+
 }

@@ -21,24 +21,35 @@ public class SqlStatementLoader {
     @Autowired private SqlParser parser;
 
     public SqlStatement parseResource(String resource) throws IOException {
-        File file = new File(resource);
-        File rootDirectory = new File("");
+        String directoryPath, fileName;
 
-        String name = toName(file);
-        String path = toPath(rootDirectory, file);
-        String content = loadResource(path);
-        SqlStatement.Builder builder = parser.parse(content);
+        int fileSeparatorIndex = resource.lastIndexOf("/");
+        if (fileSeparatorIndex >= 0) {
+            directoryPath = resource.substring(0, fileSeparatorIndex);
+            fileName = resource.substring(fileSeparatorIndex + 1);
+        }
+        else {
+            directoryPath = "";
+            fileName = resource;
+        }
 
-        builder.setName(name);
-        builder.setPath(path);
+        String rootDirectoryPath = "";
+        String content = loadResource(resource);
 
-        return builder.build();
+        return makeStatement(rootDirectoryPath, directoryPath, fileName, content);
     }
 
     public SqlStatement parseFile(File rootDirectory, File file) throws IOException {
-        String name = toName(file);
-        String path = toPath(rootDirectory, file);
+        String rootDirectoryPath = toPath(rootDirectory);
+        String directory = toPath(file.getParentFile());
         String content = loadFile(file);
+
+        return makeStatement(rootDirectoryPath, directory, file.getName(), content);
+    }
+
+    private SqlStatement makeStatement(String rootDirectory, String directory, String file, String content) {
+        String name = toName(file);
+        String path = toRelativePath(rootDirectory, directory);
         SqlStatement.Builder builder = parser.parse(content);
 
         builder.setName(name);
@@ -55,18 +66,18 @@ public class SqlStatementLoader {
         return Files.toString(file, Charsets.UTF_8);
     }
 
-    private String toName(File file) {
-        checkNotNull(file);
+    private String toName(String name) {
+        checkNotNull(name);
 
-        return snakeToCamel(stripExtension(file.getName()));
+        return snakeToCamel(stripExtension(name));
     }
 
-    private String toPath(File rootDirectory, File file) throws IOException {
+    private String toRelativePath(String rootDirectory, String directory) {
         checkNotNull(rootDirectory);
-        checkNotNull(file);
-        checkState(isContained(rootDirectory, file), "File must be contained within the provided Root Directory");
+        checkNotNull(directory);
+        checkState(directory.startsWith(rootDirectory), "Directory must be contained within the provided Root Directory");
 
-        return toPath(file).substring(toPath(rootDirectory).length());
+        return directory.substring(rootDirectory.length());
     }
 
     private String stripExtension(String name) {
@@ -84,10 +95,6 @@ public class SqlStatementLoader {
 
     private String capitalizeFirstLetter(String word) {
         return word.substring(0, 1).toUpperCase() + word.substring(1);
-    }
-
-    private boolean isContained(File directory, File file) throws IOException {
-        return toPath(file).startsWith(toPath(directory));
     }
 
     private String toPath(File file) throws IOException {
