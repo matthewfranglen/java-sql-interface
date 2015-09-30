@@ -69,7 +69,7 @@ public class SqlStatementLoader {
     private String toName(String name) {
         checkNotNull(name);
 
-        return snakeToCamel(stripExtension(name));
+        return skewerToCamel(stripExtension(name));
     }
 
     private String toRelativePath(String rootDirectory, String directory) {
@@ -86,7 +86,7 @@ public class SqlStatementLoader {
             : name;
     }
 
-    private String snakeToCamel(String name) {
+    private String skewerToCamel(String name) {
         return Arrays.asList(name.split("-"))
             .stream()
             .map(this::capitalizeFirstLetter)
