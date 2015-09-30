@@ -32,4 +32,30 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.matthew.java-sql-interface</groupId>
+                <artifactId>compiler</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+                <configuration>
+                    <statements>
+                        <directory>src/main/resources</directory>
+                        <includes>
+                            <include>**/*.sql</include>
+                        </includes>
+                    </statements>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>compiler</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
