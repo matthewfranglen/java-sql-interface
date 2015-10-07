@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Java to SQL Interface</name>
+    <name>Example of Java to SQL Interface</name>
     <description>Project Aggregator for the Code Example</description>
 
     <parent>

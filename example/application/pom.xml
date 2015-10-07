@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>SQL Statement Java Code Generator</name>
+    <name>Example Application</name>
     <description>Example of using the generated statements</description>
 
     <parent>
