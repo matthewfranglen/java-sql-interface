@@ -25,7 +25,7 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
 
     private static final String OUTPUT_FOLDER = "target/generated-sources/sql-statements";
 
-    @Parameter
+    @Parameter( required = true )
     private FileSet statements;
 
     private final SqlStatementLoader loader;
