@@ -12,6 +12,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.FileUtils;
 
 import com.google.common.base.Charsets;
@@ -25,11 +26,16 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
 
     private static final String OUTPUT_FOLDER = "target/generated-sources/sql-statements";
 
+    @Parameter( defaultValue = "${project}", readonly = true )
+    private MavenProject project;
+
     @Parameter( required = true )
     private FileSet statements;
 
     private final SqlStatementLoader loader;
     private final CodeGenerator generator;
+
+    private String basedir;
 
     public SqlStatementCompilerMojo() {
         loader = new SqlStatementLoader();
@@ -37,6 +43,13 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
     }
 
     public void execute() throws MojoExecutionException, MojoFailureException {
+        try {
+            basedir = project.getBasedir().getCanonicalPath();
+        }
+        catch (IOException e) {
+            throw new MojoExecutionException("Unable to read project base directory path", e);
+        }
+
         try {
             Collection<SqlStatement> statements = getStatements();
 
@@ -51,7 +64,7 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
     }
 
     private Collection<SqlStatement> getStatements() throws IOException {
-        File rootDirectory = new File(statements.getDirectory());
+        File rootDirectory = new File(basedir, statements.getDirectory());
 
         return getStatementFiles(rootDirectory).stream()
             .map((File file) -> parseStatementFile(rootDirectory, file))
@@ -101,14 +114,15 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
 
     private void writeStatementCode(GeneratedCode code) {
         String path = String.format("%s/%s/%s.java", OUTPUT_FOLDER, code.getStatement().getPath(), code.getStatement().getName());
-        File file = new File(path);
+        File file = new File(basedir, path);
 
         write(file, code.getCode());
         getLog().info(String.format("Written Statement: %s.%s", code.getStatement().getPackage(), code.getStatement().getName()));
     }
 
     private void writeStatementHandlerCode(Collection<SqlStatement> statements) throws Exception {
-        File file = new File(String.format("%s/com/matthew/sql/generated/SqlStatementHandler.java", OUTPUT_FOLDER));
+        String path = String.format("%s/com/matthew/sql/generated/SqlStatementHandler.java", OUTPUT_FOLDER);
+        File file = new File(basedir, path);
         String code = generator.generateStatementHandlerCode(statements);
 
         write(file, code);

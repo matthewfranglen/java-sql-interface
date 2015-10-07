@@ -33,7 +33,7 @@
                 <version>0.0.1-SNAPSHOT</version>
                 <configuration>
                     <statements>
-                        <directory>${basedir}/src/main/resources</directory>
+                        <directory>src/main/resources</directory>
                         <includes>
                             <include>**/*.sql</include>
                         </includes>
