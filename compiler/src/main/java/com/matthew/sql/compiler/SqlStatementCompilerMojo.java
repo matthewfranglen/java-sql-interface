@@ -21,7 +21,7 @@ import com.matthew.sql.generator.CodeGenerator;
 import com.matthew.sql.parser.SqlStatement;
 import com.matthew.sql.parser.SqlStatementLoader;
 
-@Mojo(name = "compiler", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
+@Mojo(name = "compile", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
 public class SqlStatementCompilerMojo extends AbstractMojo {
 
     private static final String OUTPUT_FOLDER = "target/generated-sources/sql-statements";

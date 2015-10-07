@@ -43,7 +43,7 @@
                     <execution>
                         <phase>generate-sources</phase>
                         <goals>
-                            <goal>compiler</goal>
+                            <goal>compile</goal>
                         </goals>
                     </execution>
                 </executions>
