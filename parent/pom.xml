@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>SQL Statement File Parser</name>
+    <name>SQL Statement Parent</name>
     <description>Parent POM defining version numbers and optional dependencies</description>
 
     <properties>

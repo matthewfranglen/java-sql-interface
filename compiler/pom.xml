@@ -6,7 +6,7 @@
     <artifactId>compiler</artifactId>
     <packaging>maven-plugin</packaging>
 
-    <name>SQL Statement Java Code Generator</name>
+    <name>SQL Statement Compiler</name>
     <description>Maven Mojo to create Java Classes from SQL Statements</description>
 
     <parent>
