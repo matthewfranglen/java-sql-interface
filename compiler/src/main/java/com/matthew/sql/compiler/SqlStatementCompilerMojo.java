@@ -35,20 +35,26 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
     private final SqlStatementLoader loader;
     private final CodeGenerator generator;
 
-    private String basedir;
+    private String projectRootDirectory;
+    private String generatedSourcesDirectory;
 
     public SqlStatementCompilerMojo() {
         loader = new SqlStatementLoader();
         generator = new CodeGenerator();
     }
 
-    public void execute() throws MojoExecutionException, MojoFailureException {
+    private void initialize() throws MojoExecutionException {
         try {
-            basedir = project.getBasedir().getCanonicalPath();
+            projectRootDirectory = project.getBasedir().getCanonicalPath();
+            generatedSourcesDirectory = new File(projectRootDirectory, OUTPUT_FOLDER).getCanonicalPath();
         }
         catch (IOException e) {
-            throw new MojoExecutionException("Unable to read project base directory path", e);
+            throw new MojoExecutionException("Unable to read directory path", e);
         }
+    }
+
+    public void execute() throws MojoExecutionException, MojoFailureException {
+        initialize();
 
         try {
             Collection<SqlStatement> statements = getStatements();
@@ -61,10 +67,12 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
         catch (Exception e) {
             throw new MojoExecutionException("Failed to compile SQL Statements", e);
         }
+
+        project.addCompileSourceRoot(generatedSourcesDirectory);
     }
 
     private Collection<SqlStatement> getStatements() throws IOException {
-        File rootDirectory = new File(basedir, statements.getDirectory());
+        File rootDirectory = new File(projectRootDirectory, statements.getDirectory());
 
         return getStatementFiles(rootDirectory).stream()
             .map((File file) -> parseStatementFile(rootDirectory, file))
@@ -113,16 +121,16 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
     }
 
     private void writeStatementCode(GeneratedCode code) {
-        String path = String.format("%s/%s/%s.java", OUTPUT_FOLDER, code.getStatement().getPath(), code.getStatement().getName());
-        File file = new File(basedir, path);
+        String path = String.format("%s/%s.java", code.getStatement().getPath(), code.getStatement().getName());
+        File file = new File(generatedSourcesDirectory, path);
 
         write(file, code.getCode());
         getLog().info(String.format("Written Statement: %s.%s", code.getStatement().getPackage(), code.getStatement().getName()));
     }
 
     private void writeStatementHandlerCode(Collection<SqlStatement> statements) throws Exception {
-        String path = String.format("%s/com/matthew/sql/generated/SqlStatementHandler.java", OUTPUT_FOLDER);
-        File file = new File(basedir, path);
+        String path = "com/matthew/sql/generated/SqlStatementHandler.java";
+        File file = new File(generatedSourcesDirectory, path);
         String code = generator.generateStatementHandlerCode(statements);
 
         write(file, code);
