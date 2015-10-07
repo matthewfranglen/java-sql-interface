@@ -17,6 +17,7 @@
     </properties>
 
     <modules>
+        <module>parent</module>
         <module>parser</module>
         <module>handler</module>
         <module>generator</module>
