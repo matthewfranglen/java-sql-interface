@@ -5,7 +5,7 @@
 
     <groupId>com.matthew.java-sql-interface</groupId>
     <artifactId>example-application</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0</version>
     <packaging>jar</packaging>
 
     <name>Example Application</name>
@@ -28,7 +28,7 @@
         <dependency>
             <groupId>com.matthew.java-sql-interface</groupId>
             <artifactId>example-statements</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
