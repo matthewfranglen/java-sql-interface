@@ -5,7 +5,7 @@
 
     <groupId>com.matthew.java-sql-interface</groupId>
     <artifactId>example</artifactId>
-    <version>0.1.0</version>
+    <version>0.1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>Example of Java to SQL Interface</name>
