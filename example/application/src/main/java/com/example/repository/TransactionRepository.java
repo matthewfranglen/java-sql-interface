@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Collections;
 
 import javax.annotation.PostConstruct;
+import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -19,7 +20,7 @@ import com.matthew.sql.generated.SqlStatementHandler;
 @Repository
 public class TransactionRepository {
 
-    @Autowired SqlStatementHandler statementHandler;
+    @Autowired private DataSource dataSource;
 
     private BuyOperation buyOperation;
     private SellOperation sellOperation;
@@ -27,6 +28,8 @@ public class TransactionRepository {
 
     @PostConstruct
     public void initialize() {
+        SqlStatementHandler statementHandler = new SqlStatementHandler(dataSource);
+
         buyOperation = statementHandler.makeBuyOperation();
         sellOperation = statementHandler.makeSellOperation();
         reportQuery = statementHandler.makeReportQuery();

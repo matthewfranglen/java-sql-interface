@@ -21,9 +21,4 @@ public class Application implements CommandLineRunner {
         System.out.println(new SqlStatementHandler(null));
     }
 
-    @Bean
-    public SqlStatementHandler makeStatementHandler(DataSource dataSource) {
-        return new SqlStatementHandler(dataSource);
-    }
-
 }
