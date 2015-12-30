@@ -7,7 +7,7 @@ import com.matthew.sql.handler.AbstractStatement;
 
 public class ${name.short} extends AbstractStatement {
 
-    private static final String statement = "${statement}";
+    <@compress single_line=true>private static final String statement = "${statement}";</@compress>
 
     public ${name.short}(NamedParameterJdbcTemplate template) {
         super(template);
