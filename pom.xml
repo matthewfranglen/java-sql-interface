@@ -35,6 +35,11 @@
                     <maxmem>256m</maxmem>
                     <!-- aggregated reports for multi-module projects -->
                     <aggregate>true</aggregate>
+                    <instrumentation>
+                        <ignores>
+                            <ignore>com.matthew.sql.parser.generated.*</ignore>
+                        </ignores>
+                    </instrumentation>
                 </configuration>
             </plugin>
 
