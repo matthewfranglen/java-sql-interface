@@ -56,10 +56,6 @@ maven plugin is defined as follows:
 This example looks for files ending in `sql` inside the resources folder of
 your project. Each one is converted into a separate class that can be used.
 
-It is recommended that you define the statements inside a module within your
-application. Doing this makes code completion on the generated code far more
-reliable. You can see an example of doing this in the example project.
-
 You can build the classes as part of the default lifecycle. This means that
 when you run `mvn clean install` the Java classes are correctly created. To do
 this you must bind to the compile:generate-sources part of the maven lifecycle:
@@ -104,9 +100,22 @@ this you must bind to the compile:generate-sources part of the maven lifecycle:
 </build>
 ```
 
+Once this has been done you can then fetch the statement class using the
+StatementHandler:
+
+```java
+SqlStatementHandler statementHandler = new SqlStatementHandler(dataSource);
+YourStatementClass statement = statementHandler.makeYourStatementClass();
+```
+
 
 Description
 -----------
+
+It is recommended that you define the statements inside a module within your
+application. Doing this makes code completion on the generated code far more
+reliable. You can see an example of doing this in the example project.
+
 
 Examples
 --------
