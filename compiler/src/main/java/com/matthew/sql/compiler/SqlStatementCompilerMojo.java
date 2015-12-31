@@ -2,8 +2,8 @@ package com.matthew.sql.compiler;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 import org.apache.maven.model.FileSet;
 import org.apache.maven.plugin.AbstractMojo;
@@ -16,6 +16,7 @@ import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.FileUtils;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Joiner;
 import com.google.common.io.Files;
 import com.matthew.sql.generator.CodeGenerator;
 import com.matthew.sql.parser.SqlStatement;
@@ -73,21 +74,27 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
 
     private Collection<SqlStatement> getStatements() throws IOException {
         File rootDirectory = new File(projectRootDirectory, statements.getDirectory());
+        Collection<File> statementFiles = getStatementFiles(rootDirectory);
 
-        return getStatementFiles(rootDirectory).stream()
-            .map((File file) -> parseStatementFile(rootDirectory, file))
-            .collect(Collectors.toList());
+        return parseStatementFileList(rootDirectory, statementFiles);
     }
 
     private Collection<File> getStatementFiles(File directory) throws IOException {
-        String includes = statements.getIncludes()
-            .stream()
-            .collect(Collectors.joining(","));
-        String excludes = statements.getExcludes()
-            .stream()
-            .collect(Collectors.joining(","));
+        Joiner joiner = Joiner.on(",");
+        String includes = joiner.join(statements.getIncludes());
+        String excludes = joiner.join(statements.getExcludes());
 
         return FileUtils.getFiles(directory, includes, excludes);
+    }
+
+    private Collection<SqlStatement> parseStatementFileList(File rootDirectory, Collection<File> statementFiles) {
+        Collection<SqlStatement> result = new ArrayList<>(statementFiles.size());
+
+        for (File current : statementFiles) {
+            result.add(parseStatementFile(rootDirectory, current));
+        }
+
+        return result;
     }
 
     private SqlStatement parseStatementFile(File rootDirectory, File statement) {
@@ -103,9 +110,9 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
     }
 
     private void writeStatementCode(Collection<SqlStatement> statements) throws Exception {
-        statements.stream()
-            .map(this::makeStatementCode)
-            .forEach(this::writeStatementCode);
+        for (SqlStatement current : statements) {
+            writeStatementCode(makeStatementCode(current));
+        }
     }
 
     private GeneratedCode makeStatementCode(SqlStatement statement) {
