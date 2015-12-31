@@ -14,7 +14,6 @@ public class SqlStatement {
 
     public SqlStatement(String name, String path, String statement) {
         checkArgument(! Strings.isNullOrEmpty(name), "name is null or blank");
-        checkArgument(! Strings.isNullOrEmpty(path), "path is null or blank");
         checkArgument(! Strings.isNullOrEmpty(statement), "statement is null or blank");
 
         if (path.startsWith("/")) {
@@ -34,8 +33,15 @@ public class SqlStatement {
         return path;
     }
 
+    public boolean hasPath() {
+        return ! Strings.isNullOrEmpty(path);
+    }
+
     public String getPackage() {
-        return path.replaceAll(File.separator, ".");
+        if (hasPath()) {
+            return path.replaceAll(File.separator, ".");
+        }
+        return "";
     }
 
     public String getStatement() {
