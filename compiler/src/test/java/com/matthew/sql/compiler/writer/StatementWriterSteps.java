@@ -5,7 +5,6 @@ import static org.mockito.Mockito.mock;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -25,45 +24,19 @@ import cucumber.api.java.en.When;
 
 import freemarker.template.TemplateException;
 
-public class StatementWriterSteps {
-
-    private static int temporaryFolderCounter = 0;
-
-    private Path testFolder;
+public class StatementWriterSteps extends WriterSteps {
 
     private Collection<SqlStatement> statements;
     private File generatedSourcesDirectory;
 
     @Before
     public void init() throws IOException {
-        testFolder = java.nio.file.Files.createTempDirectory(null);
+        super.init();
     }
 
     @After
     public void deinit() throws IOException {
-        delete(testFolder.toFile());
-    }
-
-    private File makeTemporaryFolder() throws IOException {
-        File result = new File(testFolder.toFile(), String.valueOf(temporaryFolderCounter));
-        temporaryFolderCounter++;
-
-        if (! result.mkdir()) {
-            throw new IOException("Failed to create folder: " + result);
-        }
-        return result;
-    }
-
-    private void delete(File file) throws IOException {
-        if (file.isDirectory()) {
-            for (File current : file.listFiles()) {
-                delete(current);
-            }
-        }
-
-        if (! file.delete()) {
-            throw new IOException("Failed to delete file: " + file);
-        }
+        super.deinit();
     }
 
     @Given("^the statements loaded using the inclusion pattern \"(.*)\"$")
