@@ -2,10 +2,10 @@ package com.matthew.sql.generator;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import com.matthew.sql.parser.SqlStatement;
 
@@ -57,14 +57,19 @@ public class CodeGenerator {
     private Map<String, ?> makeStatementHandlerParameters(Collection<SqlStatement> statements) {
         Map<String, Object> parameters = new HashMap<>();
 
-        parameters.put(
-            "statements",
-            statements.stream()
-                .map(this::makeStatementParameters)
-                .collect(Collectors.toList())
-        );
+        parameters.put("statements", makeStatementParametersList(statements));
 
         return parameters;
+    }
+
+    private Collection<Map<String, ?>> makeStatementParametersList(Collection<SqlStatement> statements) {
+        Collection<Map<String, ?>> result = new ArrayList<>();
+
+        for (SqlStatement current : statements) {
+            result.add(makeStatementParameters(current));
+        }
+
+        return result;
     }
 
     private Map<String, ?> makeStatementParameters(SqlStatement statement) {
