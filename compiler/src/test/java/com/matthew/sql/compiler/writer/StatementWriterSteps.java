@@ -66,9 +66,9 @@ public class StatementWriterSteps {
         }
     }
 
-    @Given("^the statement loaded from the resource \"(.*)\"$")
-    public void givenTheStatementLoadedFromTheResource(String resource) throws IOException {
-        Collection<String> includes = Collections.singletonList(resource);
+    @Given("^the statements loaded using the inclusion pattern \"(.*)\"$")
+    public void givenTheStatementsLoadedUsingTheInclusionPattern(String include) throws IOException {
+        Collection<String> includes = Collections.singletonList(include);
         Collection<String> excludes = Collections.emptyList();
         StatementReader reader = new StatementReader(".", "src/test/resources", includes, excludes);
 
