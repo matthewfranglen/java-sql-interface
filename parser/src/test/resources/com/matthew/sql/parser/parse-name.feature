@@ -12,6 +12,7 @@ Feature: Can read SQL Statement Name
         | statements/statement-with-argument.sql | StatementWithArgument |
         | statements/statement-with-comment.sql  | StatementWithComment  |
         | statements/statement.sql               | Statement             |
+        | statement.sql                          | Statement             |
 
     Scenario Outline: Reading from different files
 
@@ -25,3 +26,4 @@ Feature: Can read SQL Statement Name
         | src/test/resources | statements/statement-with-argument.sql | StatementWithArgument |
         | src/test/resources | statements/statement-with-comment.sql  | StatementWithComment  |
         | src/test/resources | statements/statement.sql               | Statement             |
+        | src/test/resources | statement.sql                          | Statement             |
