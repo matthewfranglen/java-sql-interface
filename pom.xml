@@ -35,11 +35,6 @@
                     <maxmem>256m</maxmem>
                     <!-- aggregated reports for multi-module projects -->
                     <aggregate>true</aggregate>
-                    <instrumentation>
-                        <excludes>
-                            <exclude>**/generated/**/*.class</exclude>
-                        </excludes>
-                    </instrumentation>
                 </configuration>
             </plugin>
 
