@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/matthewfranglen/java-sql-interface.svg)](https://travis-ci.org/matthewfranglen/java-sql-interface.svg)
+[![Coverage Status](https://coveralls.io/repos/matthewfranglen/java-sql-interface/badge.svg?branch=develop&service=github)](https://coveralls.io/github/matthewfranglen/java-sql-interface?branch=develop)
 
 Java SQL Interface
 ==================
