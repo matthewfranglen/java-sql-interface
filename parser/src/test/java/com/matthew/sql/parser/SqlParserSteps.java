@@ -2,6 +2,7 @@ package com.matthew.sql.parser;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.File;
 import java.io.IOException;
 
 import cucumber.api.PendingException;
@@ -14,6 +15,7 @@ public class SqlParserSteps {
 
     private SqlStatementLoader loader;
 
+    private File file, directory;
     private String resource;
     private SqlStatement statement;
 
@@ -22,9 +24,20 @@ public class SqlParserSteps {
         loader = new SqlStatementLoader();
     }
 
+    @Given("^the file \"(.*)\" and the directory \"(.*)\"$")
+    public void givenTheFileAndTheDirectory(String file, String directory) throws IOException {
+        this.file = new File(directory, file);
+        this.directory = new File(directory);
+    }
+
     @Given("^the resource \"(.*)\"$")
-    public void givenTheResource(String file) throws IOException {
-        resource = file;
+    public void givenTheResource(String resource) throws IOException {
+        this.resource = resource;
+    }
+
+    @When("^the file is loaded as a statement$")
+    public void whenTheFileIsLoadedAsAStatement() throws IOException {
+        statement = loader.parseFile(directory, file);
     }
 
     @When("^the resource is loaded as a statement$")
