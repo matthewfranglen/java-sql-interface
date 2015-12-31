@@ -1,24 +1,18 @@
 package com.example;
 
-import javax.sql.DataSource;
-
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import com.matthew.sql.generated.SqlStatementHandler;
 
 @SpringBootApplication
-public class Application implements CommandLineRunner {
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+        try {
+            Thread.sleep(1000);
+        }
+        catch (InterruptedException e) { }
 
-    public void run(String... args) {
-        System.out.println(SqlStatementHandler.class);
-        System.out.println(new SqlStatementHandler(null));
+        SpringApplication.run(Application.class, args);
     }
 
 }
