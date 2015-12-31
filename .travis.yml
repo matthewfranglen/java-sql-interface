@@ -6,4 +6,4 @@ cache:
 jdk:
     - oraclejdk8
 after_success:
-    - mvn cobertura:cobertura coveralls:report
+    - mvn clean test cobertura:cobertura coveralls:report
