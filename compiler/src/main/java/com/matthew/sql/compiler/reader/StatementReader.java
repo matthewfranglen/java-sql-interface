@@ -44,7 +44,7 @@ public class StatementReader {
         return FileUtils.getFiles(directory, includes, excludes);
     }
 
-    private Collection<SqlStatement> parseStatementFileList(File rootDirectory, Collection<File> statementFiles) {
+    private Collection<SqlStatement> parseStatementFileList(File rootDirectory, Collection<File> statementFiles) throws IOException {
         Collection<SqlStatement> result = new ArrayList<>(statementFiles.size());
 
         for (File current : statementFiles) {
@@ -54,16 +54,8 @@ public class StatementReader {
         return result;
     }
 
-    private SqlStatement parseStatementFile(File rootDirectory, File statement) {
-        try {
-            return loader.parseFile(rootDirectory, statement);
-        }
-        catch (RuntimeException e) {
-            throw e;
-        }
-        catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+    private SqlStatement parseStatementFile(File rootDirectory, File statement) throws IOException {
+        return loader.parseFile(rootDirectory, statement);
     }
 
 }
