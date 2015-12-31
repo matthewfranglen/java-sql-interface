@@ -13,7 +13,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
+        <java.version>1.7</java.version>
         <java-sql-interface.version>0.1.1-SNAPSHOT</java-sql-interface.version>
     </properties>
 
