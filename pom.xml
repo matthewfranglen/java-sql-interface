@@ -36,9 +36,9 @@
                     <!-- aggregated reports for multi-module projects -->
                     <aggregate>true</aggregate>
                     <instrumentation>
-                        <ignores>
-                            <ignore>com.matthew.sql.parser.generated.*</ignore>
-                        </ignores>
+                        <excludes>
+                            <exclude>**/generated/**/*.class</exclude>
+                        </excludes>
                     </instrumentation>
                 </configuration>
             </plugin>
