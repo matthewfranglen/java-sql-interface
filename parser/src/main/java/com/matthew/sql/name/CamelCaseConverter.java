@@ -8,7 +8,7 @@ import com.google.common.base.Joiner;
 
 public class CamelCaseConverter implements NameConverter {
 
-    private static final Pattern separator = Pattern.compile("(?=\\p{javaUpperCase})");
+    private static final Pattern separator = Pattern.compile("\\B(?=\\p{javaUpperCase})");
     private static final Joiner joiner = Joiner.on("");
 
     public List<String> split(String name) {
