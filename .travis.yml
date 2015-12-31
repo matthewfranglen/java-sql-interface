@@ -1,6 +1,10 @@
 language: java
+sudo: false
+cache:
+    directories:
+        - $HOME/.m2/repository
 jdk:
-      - oraclejdk8
+    - oraclejdk8
 script:
-      - mvn install -Dskip.unit.tests=true -Dmaven.javadoc.skip=true --show-version --batch-mode
-      - mvn clean test coveralls:report --show-version --activate-profiles coverage
+    - mvn install -Dskip.unit.tests=true -Dmaven.javadoc.skip=true --show-version --batch-mode
+    - mvn clean test coveralls:report --show-version --activate-profiles coverage
