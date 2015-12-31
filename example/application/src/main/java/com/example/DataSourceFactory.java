@@ -1,37 +1,30 @@
 package com.example;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
-import org.postgresql.ds.PGSimpleDataSource;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 public class DataSourceFactory {
 
-    @Value("${datasource.host}")
-    private String host;
-
-    @Value("${datasource.database}")
-    private String database;
-
-    @Value("${datasource.username}")
-    private String username;
-
-    @Value("${datasource.password}")
-    private String password;
-
     @Bean
-    public DataSource dataSource() {
-        PGSimpleDataSource dataSource = new PGSimpleDataSource();
+    public DataSource dataSource() throws IOException {
+        try (InputStream in = getClass().getResourceAsStream("/db.properties")) {
+            Properties properties = new Properties();
+            properties.load(in);
 
-        dataSource.setServerName(host);
-        dataSource.setDatabaseName(database);
-        dataSource.setUser(username);
-        dataSource.setPassword(password);
+            HikariConfig config = new HikariConfig(properties);
 
-        return dataSource;
+            return new HikariDataSource(config);
+        }
     }
 
 }
