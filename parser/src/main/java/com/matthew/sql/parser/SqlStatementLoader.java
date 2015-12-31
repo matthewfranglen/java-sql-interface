@@ -5,14 +5,17 @@ import static com.google.common.base.Preconditions.checkState;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
+import com.matthew.sql.name.CamelCaseConverter;
+import com.matthew.sql.name.SeparatorConverter;
 
 public class SqlStatementLoader {
+
+    private static final SeparatorConverter skewerConverter = new SeparatorConverter("-");
+    private static final CamelCaseConverter camelCaseConverter = new CamelCaseConverter();
 
     private SqlParser parser;
 
@@ -87,14 +90,7 @@ public class SqlStatementLoader {
     }
 
     private String skewerToCamel(String name) {
-        return Arrays.asList(name.split("-"))
-            .stream()
-            .map(this::capitalizeFirstLetter)
-            .collect(Collectors.joining());
-    }
-
-    private String capitalizeFirstLetter(String word) {
-        return word.substring(0, 1).toUpperCase() + word.substring(1);
+        return camelCaseConverter.join(skewerConverter.split(name));
     }
 
     private String toPath(File file) throws IOException {
