@@ -1,3 +1,7 @@
 language: java
 jdk:
       - oraclejdk8
+script:
+      - mvn install -Dskip.unit.tests=true -Dmaven.javadoc.skip=true --show-version --batch-mode
+      - mvn clean test coveralls:report --show-version --activate-profiles coverage
+      - mvn test
