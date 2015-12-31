@@ -18,6 +18,7 @@ import org.codehaus.plexus.util.FileUtils;
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.io.Files;
+import com.matthew.sql.compiler.statement.GeneratedCode;
 import com.matthew.sql.generator.CodeGenerator;
 import com.matthew.sql.parser.SqlStatement;
 import com.matthew.sql.parser.SqlStatementLoader;

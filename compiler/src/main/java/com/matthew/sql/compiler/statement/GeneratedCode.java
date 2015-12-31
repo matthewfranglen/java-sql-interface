@@ -1,4 +1,4 @@
-package com.matthew.sql.compiler;
+package com.matthew.sql.compiler.statement;
 
 import com.matthew.sql.parser.SqlStatement;
 
