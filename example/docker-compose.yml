@@ -1,0 +1,8 @@
+backend:
+    image: matthew/example-application
+    links:
+        - postgres
+    ports:
+        - "8080:8080"
+postgres:
+    image: postgres
