@@ -63,7 +63,7 @@ public class CodeGenerator {
     }
 
     private Collection<Map<String, ?>> makeStatementParametersList(Collection<SqlStatement> statements) {
-        Collection<Map<String, ?>> result = new ArrayList<>();
+        Collection<Map<String, ?>> result = new ArrayList<>(statements.size());
 
         for (SqlStatement current : statements) {
             result.add(makeStatementParameters(current));
