@@ -65,4 +65,9 @@ public class SqlParserSteps {
         assertEquals(_package, statement.getPackage());
     }
 
+    @Then("^the loaded statement path is \"(.*)\"$")
+    public void thenTheLoadedStatementPathIs(String path) {
+        assertEquals(path, statement.getPath());
+    }
+
 }
