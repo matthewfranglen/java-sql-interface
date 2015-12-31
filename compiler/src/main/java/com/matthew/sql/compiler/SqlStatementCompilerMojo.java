@@ -2,7 +2,6 @@ package com.matthew.sql.compiler;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.maven.model.FileSet;
@@ -13,15 +12,13 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
-import org.codehaus.plexus.util.FileUtils;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Joiner;
 import com.google.common.io.Files;
+import com.matthew.sql.compiler.reader.StatementReader;
 import com.matthew.sql.compiler.statement.GeneratedCode;
 import com.matthew.sql.generator.CodeGenerator;
 import com.matthew.sql.parser.SqlStatement;
-import com.matthew.sql.parser.SqlStatementLoader;
 
 @Mojo(name = "compile", defaultPhase = LifecyclePhase.GENERATE_SOURCES)
 public class SqlStatementCompilerMojo extends AbstractMojo {
@@ -34,14 +31,12 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
     @Parameter( required = true )
     private FileSet statements;
 
-    private final SqlStatementLoader loader;
     private final CodeGenerator generator;
 
     private String projectRootDirectory;
     private String generatedSourcesDirectory;
 
     public SqlStatementCompilerMojo() {
-        loader = new SqlStatementLoader();
         generator = new CodeGenerator();
     }
 
@@ -59,10 +54,11 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
         initialize();
 
         try {
-            Collection<SqlStatement> statements = getStatements();
+            StatementReader reader = new StatementReader(projectRootDirectory, statements.getDirectory(), statements.getIncludes(), statements.getExcludes());
+            Collection<SqlStatement> loadedStatements = reader.getStatements();
 
-            writeStatementCode(statements);
-            writeStatementHandlerCode(statements);
+            writeStatementCode(loadedStatements);
+            writeStatementHandlerCode(loadedStatements);
 
             getLog().info("Completed SQL Statement Compilation");
         }
@@ -71,43 +67,6 @@ public class SqlStatementCompilerMojo extends AbstractMojo {
         }
 
         project.addCompileSourceRoot(generatedSourcesDirectory);
-    }
-
-    private Collection<SqlStatement> getStatements() throws IOException {
-        File rootDirectory = new File(projectRootDirectory, statements.getDirectory());
-        Collection<File> statementFiles = getStatementFiles(rootDirectory);
-
-        return parseStatementFileList(rootDirectory, statementFiles);
-    }
-
-    private Collection<File> getStatementFiles(File directory) throws IOException {
-        Joiner joiner = Joiner.on(",");
-        String includes = joiner.join(statements.getIncludes());
-        String excludes = joiner.join(statements.getExcludes());
-
-        return FileUtils.getFiles(directory, includes, excludes);
-    }
-
-    private Collection<SqlStatement> parseStatementFileList(File rootDirectory, Collection<File> statementFiles) {
-        Collection<SqlStatement> result = new ArrayList<>(statementFiles.size());
-
-        for (File current : statementFiles) {
-            result.add(parseStatementFile(rootDirectory, current));
-        }
-
-        return result;
-    }
-
-    private SqlStatement parseStatementFile(File rootDirectory, File statement) {
-        try {
-            return loader.parseFile(rootDirectory, statement);
-        }
-        catch (RuntimeException e) {
-            throw e;
-        }
-        catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 
     private void writeStatementCode(Collection<SqlStatement> statements) throws Exception {
