@@ -5,7 +5,10 @@ import static org.junit.Assert.assertFalse;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 
+import com.matthew.sql.statement.Argument;
+import com.matthew.sql.statement.ArgumentType;
 import com.matthew.sql.statement.SqlStatement;
 
 import cucumber.api.java.Before;
@@ -59,7 +62,27 @@ public class SqlParserSteps {
 
     @Then("^the loaded statement taken argument has a name of \"(.*)\"$")
     public void thenTheLoadedStatementTakenArgumentHasANameOf(String name) {
-        assertEquals(name, statement.getTakes().iterator().next().getName());
+        assertEquals(name, getFirst(statement.getTakes()).getName());
+    }
+
+    @Then("^the loaded statement taken argument has a type of TEXT$")
+    public void thenTheLoadedStatementTakenArgumentHasATypeOfText() {
+        assertEquals(ArgumentType.TEXT, getFirst(statement.getTakes()).getType());
+    }
+
+    @Then("^the loaded statement taken argument has a type of TIMESTAMP$")
+    public void thenTheLoadedStatementTakenArgumentHasATypeOfTimestamp() {
+        assertEquals(ArgumentType.TIMESTAMP, getFirst(statement.getTakes()).getType());
+    }
+
+    @Then("^the loaded statement taken argument has a type of FRACTIONAL_NUMBER$")
+    public void thenTheLoadedStatementTakenArgumentHasATypeOfFractionalNumber() {
+        assertEquals(ArgumentType.FRACTIONAL_NUMBER, getFirst(statement.getTakes()).getType());
+    }
+
+    @Then("^the loaded statement taken argument has a type of WHOLE_NUMBER$")
+    public void thenTheLoadedStatementTakenArgumentHasATypeOfWholeNumber() {
+        assertEquals(ArgumentType.WHOLE_NUMBER, getFirst(statement.getTakes()).getType());
     }
 
     @Then("^the loaded statement returns (\\d+) arguments$")
@@ -74,7 +97,31 @@ public class SqlParserSteps {
 
     @Then("^the loaded statement returned argument has a name of \"(.*)\"$")
     public void thenTheLoadedStatementReturnedArgumentHasANameOf(String name) {
-        assertEquals(name, statement.getReturns().iterator().next().getName());
+        assertEquals(name, getFirst(statement.getReturns()).getName());
+    }
+
+    @Then("^the loaded statement returned argument has a type of TEXT$")
+    public void thenTheLoadedStatementReturnedArgumentHasATypeOfText() {
+        assertEquals(ArgumentType.TEXT, getFirst(statement.getReturns()).getType());
+    }
+
+    @Then("^the loaded statement returned argument has a type of TIMESTAMP$")
+    public void thenTheLoadedStatementReturnedArgumentHasATypeOfTimestamp() {
+        assertEquals(ArgumentType.TIMESTAMP, getFirst(statement.getReturns()).getType());
+    }
+
+    @Then("^the loaded statement returned argument has a type of FRACTIONAL_NUMBER$")
+    public void thenTheLoadedStatementReturnedArgumentHasATypeOfFractionalNumber() {
+        assertEquals(ArgumentType.FRACTIONAL_NUMBER, getFirst(statement.getReturns()).getType());
+    }
+
+    @Then("^the loaded statement returned argument has a type of WHOLE_NUMBER$")
+    public void thenTheLoadedStatementReturnedArgumentHasATypeOfWholeNumber() {
+        assertEquals(ArgumentType.WHOLE_NUMBER, getFirst(statement.getReturns()).getType());
+    }
+
+    private Argument getFirst(Collection<Argument> arguments) {
+        return arguments.iterator().next();
     }
 
     @Then("^the loaded statement body is \"(.*)\"$")
