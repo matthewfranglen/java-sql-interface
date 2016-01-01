@@ -17,7 +17,7 @@ statement
 ;
 
 comment_line
-: COMMENT ( CHAR | WS )* EOL
+: COMMENT line
 ;
 
 blank_line
