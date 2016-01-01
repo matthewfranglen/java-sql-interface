@@ -35,6 +35,14 @@
                     <maxmem>256m</maxmem>
                     <!-- aggregated reports for multi-module projects -->
                     <aggregate>true</aggregate>
+                    <instrumentation>
+                        <ignores>
+                            <ignore>com.matthew.sql.compiler.HelpMojo</ignore>
+                        </ignores>
+                        <excludes>
+                            <exclude>com/matthew/sql/compiler/HelpMojo</exclude>
+                        </excludes>
+                    </instrumentation>
                 </configuration>
             </plugin>
 
