@@ -50,7 +50,9 @@
                 <version>4.1.0</version>
                 <configuration>
                     <repoToken>${env.coveralls_repo_token}</repoToken>
-                    <scanForSources>true</scanForSources>
+                    <sourceDirectories>
+                        <sourceDirectory>parser/target/generated-sources/antlr4</sourceDirectory>
+                    </sourceDirectories>
                 </configuration>
             </plugin>
         </plugins>
