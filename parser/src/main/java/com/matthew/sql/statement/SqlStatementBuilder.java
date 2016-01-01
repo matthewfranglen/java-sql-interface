@@ -74,7 +74,7 @@ public class SqlStatementBuilder {
     }
 
     public SqlStatement build() {
-        return new SqlStatement(name, path, statement);
+        return new SqlStatement(name, path, statement, takes, returns);
     }
 
     private enum CollectionState {

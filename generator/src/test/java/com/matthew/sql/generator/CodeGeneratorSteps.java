@@ -37,13 +37,13 @@ public class CodeGeneratorSteps {
 
     @When("^the statement is converted to a statement handler class$")
     public void whenTheStatementIsConvertedToAStatementHandlerClass() throws Exception {
-        SqlStatement statementObject = new SqlStatement(name, path, statement);
+        SqlStatement statementObject = new SqlStatement(name, path, statement, null, null);
         code = new CodeGenerator().generateStatementHandlerCode(Arrays.asList(statementObject));
     }
 
     @When("^the statement is converted to a statement class$")
     public void whenTheStatementIsConvertedToAStatementClass() throws Exception {
-        SqlStatement statementObject = new SqlStatement(name, path, statement);
+        SqlStatement statementObject = new SqlStatement(name, path, statement, null, null);
         code = new CodeGenerator().generateStatementCode(statementObject);
     }
 
