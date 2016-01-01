@@ -19,6 +19,11 @@ public class StatementBuildingListener extends StatementBaseListener {
     }
 
     @Override
+    public void exitInvalid_type(StatementParser.Invalid_typeContext ctx) {
+        throw new IllegalStateException("Invalid type encountered: " + ctx.getText());
+    }
+
+    @Override
     public void exitStatement(StatementParser.StatementContext ctx) {
         builder.setStatement(ctx.getText());
     }

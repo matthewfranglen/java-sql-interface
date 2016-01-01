@@ -41,6 +41,7 @@ argument_type
 | WHOLE_NUMBER_TYPE
 | FRACTIONAL_NUMBER_TYPE
 | TIMESTAMP_TYPE
+| invalid_type
 ;
 
 argument_name
@@ -58,6 +59,10 @@ blank_line
 
 nonblank_line
 : WS* CHAR ( CHAR | WS )* EOL
+;
+
+invalid_type
+: CHAR+
 ;
 
 SEPARATOR
