@@ -29,18 +29,8 @@ public class StatementBuildingListener extends StatementBaseListener {
     }
 
 	@Override
-    public void enterTakes_line(StatementParser.Takes_lineContext ctx) {
-        builder.enterTakes();
-    }
-
-	@Override
     public void exitTakes_line(StatementParser.Takes_lineContext ctx) {
         builder.exitTakes();
-    }
-
-	@Override
-    public void enterReturns_line(StatementParser.Returns_lineContext ctx) {
-        builder.enterReturns();
     }
 
 	@Override
