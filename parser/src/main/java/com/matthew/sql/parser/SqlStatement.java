@@ -33,15 +33,15 @@ public class SqlStatement {
         return path;
     }
 
-    public boolean hasPath() {
-        return ! Strings.isNullOrEmpty(path);
+    public boolean inDefaultPackage() {
+        return Strings.isNullOrEmpty(path);
     }
 
     public String getPackage() {
-        if (hasPath()) {
-            return path.replaceAll(File.separator, ".");
+        if (inDefaultPackage()) {
+            return "";
         }
-        return "";
+        return path.replaceAll(File.separator, ".");
     }
 
     public String getStatement() {

@@ -76,7 +76,7 @@ public class CodeGenerator {
         Map<String, Object> parameters = new HashMap<>();
 
         parameters.put("name", makeStatementName(statement));
-        parameters.put("hasPackage", statement.hasPath());
+        parameters.put("hasPackage", ! statement.inDefaultPackage());
         parameters.put("package", statement.getPackage());
         parameters.put("statement", statement.getStatement());
 
@@ -86,11 +86,11 @@ public class CodeGenerator {
     private Map<String, ?> makeStatementName(SqlStatement statement) {
         Map<String, String> name = new HashMap<>();
 
-        if (statement.hasPath()) {
-            name.put("full", statement.getPackage() + "." + statement.getName());
+        if (statement.inDefaultPackage()) {
+            name.put("full", statement.getName());
         }
         else {
-            name.put("full", statement.getName());
+            name.put("full", statement.getPackage() + "." + statement.getName());
         }
 
         name.put("short", statement.getName());
