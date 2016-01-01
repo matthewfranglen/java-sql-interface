@@ -41,10 +41,6 @@
                             <exclude>parser/target/generated-sources/antlr4/**/*.java</exclude>
                         </excludes>
                     </instrumentation>
-                    <formats>
-                        <format>html</format>
-                        <format>xml</format>
-                    </formats>
                 </configuration>
             </plugin>
 
