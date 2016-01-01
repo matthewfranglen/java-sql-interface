@@ -7,12 +7,17 @@ Feature: Can read SQL Statement Body
         Then the loaded statement body is "SELECT * FROM table LIMIT 1;"
 
     Examples:
-        | file                                   |
-        | statements/statement-by-name.sql       |
-        | statements/statement-with-argument.sql |
-        | statements/statement-with-comment.sql  |
-        | statements/statement.sql               |
-        | statement.sql                          |
+        | file                                             |
+        | statements/statement-by-name.sql                 |
+        | statements/statement-taking-date-argument.sql    |
+        | statements/statement-taking-double-argument.sql  |
+        | statements/statement-taking-float-argument.sql   |
+        | statements/statement-taking-integer-argument.sql |
+        | statements/statement-taking-long-argument.sql    |
+        | statements/statement-taking-text-argument.sql    |
+        | statements/statement-with-comment.sql            |
+        | statements/statement.sql                         |
+        | statement.sql                                    |
 
     Scenario Outline: Reading from different files
 
@@ -21,9 +26,14 @@ Feature: Can read SQL Statement Body
         Then the loaded statement body is "SELECT * FROM table LIMIT 1;"
 
     Examples:
-        | directory          | file                                   |
-        | src/test/resources | statements/statement-by-name.sql       |
-        | src/test/resources | statements/statement-with-argument.sql |
-        | src/test/resources | statements/statement-with-comment.sql  |
-        | src/test/resources | statements/statement.sql               |
-        | src/test/resources | statement.sql                          |
+        | directory          | file                                             |
+        | src/test/resources | statements/statement-by-name.sql                 |
+        | src/test/resources | statements/statement-taking-date-argument.sql    |
+        | src/test/resources | statements/statement-taking-double-argument.sql  |
+        | src/test/resources | statements/statement-taking-float-argument.sql   |
+        | src/test/resources | statements/statement-taking-integer-argument.sql |
+        | src/test/resources | statements/statement-taking-long-argument.sql    |
+        | src/test/resources | statements/statement-taking-text-argument.sql    |
+        | src/test/resources | statements/statement-with-comment.sql            |
+        | src/test/resources | statements/statement.sql                         |
+        | src/test/resources | statement.sql                                    |

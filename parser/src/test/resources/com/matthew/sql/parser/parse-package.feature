@@ -7,12 +7,17 @@ Feature: Can read SQL Statement Package
         Then the loaded statement package is "<package>"
 
     Examples:
-        | file                                   | package    |
-        | statements/statement-by-name.sql       | statements |
-        | statements/statement-with-argument.sql | statements |
-        | statements/statement-with-comment.sql  | statements |
-        | statements/statement.sql               | statements |
-        | statement.sql                          |            |
+        | file                                             | package    |
+        | statements/statement-by-name.sql                 | statements |
+        | statements/statement-taking-date-argument.sql    | statements |
+        | statements/statement-taking-double-argument.sql  | statements |
+        | statements/statement-taking-float-argument.sql   | statements |
+        | statements/statement-taking-integer-argument.sql | statements |
+        | statements/statement-taking-long-argument.sql    | statements |
+        | statements/statement-taking-text-argument.sql    | statements |
+        | statements/statement-with-comment.sql            | statements |
+        | statements/statement.sql                         | statements |
+        | statement.sql                                    |            |
 
     Scenario Outline: Reading from different files
 
@@ -21,9 +26,14 @@ Feature: Can read SQL Statement Package
         Then the loaded statement package is "<package>"
 
     Examples:
-        | directory          | file                                   | package    |
-        | src/test/resources | statements/statement-by-name.sql       | statements |
-        | src/test/resources | statements/statement-with-argument.sql | statements |
-        | src/test/resources | statements/statement-with-comment.sql  | statements |
-        | src/test/resources | statements/statement.sql               | statements |
-        | src/test/resources | statement.sql                          |            |
+        | directory          | file                                             | package    |
+        | src/test/resources | statements/statement-by-name.sql                 | statements |
+        | src/test/resources | statements/statement-taking-date-argument.sql    | statements |
+        | src/test/resources | statements/statement-taking-double-argument.sql  | statements |
+        | src/test/resources | statements/statement-taking-float-argument.sql   | statements |
+        | src/test/resources | statements/statement-taking-integer-argument.sql | statements |
+        | src/test/resources | statements/statement-taking-long-argument.sql    | statements |
+        | src/test/resources | statements/statement-taking-text-argument.sql    | statements |
+        | src/test/resources | statements/statement-with-comment.sql            | statements |
+        | src/test/resources | statements/statement.sql                         | statements |
+        | src/test/resources | statement.sql                                    |            |
