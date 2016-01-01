@@ -38,7 +38,10 @@
                     <instrumentation>
                         <excludes>
                             <exclude>compiler/target/generated-sources/plugin/com/matthew/sql/compiler/HelpMojo.java</exclude>
-                            <exclude>parser/target/generated-sources/antlr4/**/*.java</exclude>
+                            <exclude>parser/target/generated-sources/antlr4/com/matthew/sql/parser/generated/StatementLexer.java</exclude>
+                            <exclude>parser/target/generated-sources/antlr4/com/matthew/sql/parser/generated/StatementParser.java</exclude>
+                            <exclude>parser/target/generated-sources/antlr4/com/matthew/sql/parser/generated/StatementBaseListener.java</exclude>
+                            <exclude>parser/target/generated-sources/antlr4/com/matthew/sql/parser/generated/StatementListener.java</exclude>
                         </excludes>
                     </instrumentation>
                 </configuration>
