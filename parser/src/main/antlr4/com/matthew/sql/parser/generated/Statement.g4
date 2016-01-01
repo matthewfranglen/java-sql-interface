@@ -20,17 +20,17 @@ comment_line
 : COMMENT line
 ;
 
+line
+: blank_line
+| nonblank_line
+;
+
 blank_line
 : WS* EOL
 ;
 
 nonblank_line
 : WS* CHAR ( CHAR | WS )* EOL
-;
-
-line
-: blank_line
-| nonblank_line
 ;
 
 SEPARATOR
