@@ -15,6 +15,7 @@ Feature: Can read SQL Statement returns
 
     Examples: Statements with returns
         | file                                                | count |
+        | statements/statement-returning-no-arguments.sql     | 0     |
         | statements/statement-returning-date-argument.sql    | 1     |
         | statements/statement-returning-double-argument.sql  | 1     |
         | statements/statement-returning-float-argument.sql   | 1     |
@@ -37,6 +38,7 @@ Feature: Can read SQL Statement returns
 
     Examples: Statements with returns
         | directory          | file                                                | count |
+        | src/test/resources | statements/statement-returning-no-arguments.sql     | 0     |
         | src/test/resources | statements/statement-returning-date-argument.sql    | 1     |
         | src/test/resources | statements/statement-returning-double-argument.sql  | 1     |
         | src/test/resources | statements/statement-returning-float-argument.sql   | 1     |

@@ -15,6 +15,7 @@ Feature: Can read SQL Statement takes
 
     Examples: Statements with takes
         | file                                             | count |
+        | statements/statement-taking-no-arguments.sql     | 0     |
         | statements/statement-taking-date-argument.sql    | 1     |
         | statements/statement-taking-double-argument.sql  | 1     |
         | statements/statement-taking-float-argument.sql   | 1     |
@@ -37,6 +38,7 @@ Feature: Can read SQL Statement takes
 
     Examples: Statements with takes
         | directory          | file                                             | count |
+        | src/test/resources | statements/statement-taking-no-arguments.sql     | 0     |
         | src/test/resources | statements/statement-taking-date-argument.sql    | 1     |
         | src/test/resources | statements/statement-taking-double-argument.sql  | 1     |
         | src/test/resources | statements/statement-taking-float-argument.sql   | 1     |
