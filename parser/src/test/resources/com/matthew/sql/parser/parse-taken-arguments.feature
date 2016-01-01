@@ -1,4 +1,4 @@
-Feature: Can read SQL Statement Argument
+Feature: Can read SQL Statement takes
 
     Scenario Outline: Reading from different resources
 
@@ -6,14 +6,14 @@ Feature: Can read SQL Statement Argument
         When the resource is loaded as a statement
         Then the loaded statement takes <count> arguments
 
-    Examples: Statements without Arguments
+    Examples: Statements without takes
         | file                                  | count |
         | statements/statement-by-name.sql      | 0     |
         | statements/statement-with-comment.sql | 0     |
         | statements/statement.sql              | 0     |
         | statement.sql                         | 0     |
 
-    Examples: Statements with Arguments
+    Examples: Statements with takes
         | file                                             | count |
         | statements/statement-taking-date-argument.sql    | 1     |
         | statements/statement-taking-double-argument.sql  | 1     |
@@ -28,14 +28,14 @@ Feature: Can read SQL Statement Argument
         When the file is loaded as a statement
         Then the loaded statement takes <count> arguments
 
-    Examples: Statements without Arguments
+    Examples: Statements without takes
         | directory          | file                                  | count |
         | src/test/resources | statements/statement-by-name.sql      | 0     |
         | src/test/resources | statements/statement-with-comment.sql | 0     |
         | src/test/resources | statements/statement.sql              | 0     |
         | src/test/resources | statement.sql                         | 0     |
 
-    Examples: Statements with Arguments
+    Examples: Statements with takes
         | directory          | file                                             | count |
         | src/test/resources | statements/statement-taking-date-argument.sql    | 1     |
         | src/test/resources | statements/statement-taking-double-argument.sql  | 1     |
