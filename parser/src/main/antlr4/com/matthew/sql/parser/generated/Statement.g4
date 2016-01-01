@@ -28,6 +28,14 @@ returns_line
 : COMMENT WS* RETURNS_LABEL line
 ;
 
+argument_list
+: OPEN_PARENTHESIS WS* ( argument ( WS* SEPARATOR WS* argument )* WS* )? CLOSE_PARENTHESIS
+;
+
+argument
+: CHAR+
+;
+
 line
 : blank_line
 | nonblank_line
