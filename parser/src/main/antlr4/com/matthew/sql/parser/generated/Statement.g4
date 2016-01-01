@@ -5,7 +5,11 @@ root
 ;
 
 entry
-: ( comment_line | whitespace_line )* statement
+: metadata? statement
+;
+
+metadata
+: ( comment_line | whitespace_line )+
 ;
 
 statement
