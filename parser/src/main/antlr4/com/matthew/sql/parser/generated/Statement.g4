@@ -21,11 +21,11 @@ comment_line
 ;
 
 takes_line
-: COMMENT WS* TAKES_LABEL argument_list EOL
+: COMMENT WS* TAKES_LABEL WS* argument_list EOL
 ;
 
 returns_line
-: COMMENT WS* RETURNS_LABEL argument_list EOL
+: COMMENT WS* RETURNS_LABEL WS* argument_list EOL
 ;
 
 argument_list
