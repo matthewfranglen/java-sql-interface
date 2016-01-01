@@ -45,6 +45,14 @@ SEPARATOR
 : ','
 ;
 
+OPEN_PARENTHESIS
+: '('
+;
+
+CLOSE_PARENTHESIS
+: ')'
+;
+
 COMMENT
 : '--'
 ;
