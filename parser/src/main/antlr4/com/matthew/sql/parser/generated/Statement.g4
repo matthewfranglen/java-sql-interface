@@ -13,7 +13,7 @@ metadata
 ;
 
 statement
-: statement_line ( statement_line | blank_line )*
+: nonblank_line ( nonblank_line | blank_line )*
 ;
 
 comment_line
@@ -24,7 +24,7 @@ blank_line
 : WS* EOL
 ;
 
-statement_line
+nonblank_line
 : WS* CHAR ( CHAR | WS )* EOL
 ;
 
