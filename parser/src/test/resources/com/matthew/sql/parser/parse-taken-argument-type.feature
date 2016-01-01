@@ -4,7 +4,7 @@ Feature: Can read SQL Statement taken argument type
 
         Given the resource "<file>"
         When the resource is loaded as a statement
-        Then the loaded statement taken argument has a type of "<type>"
+        Then the loaded statement taken argument has a type of <type>
 
     Examples: Statements with takes
         | file                                             | type              |
@@ -19,7 +19,7 @@ Feature: Can read SQL Statement taken argument type
 
         Given the file "<file>" and the directory "<directory>"
         When the file is loaded as a statement
-        Then the loaded statement taken argument has a type of "<type>"
+        Then the loaded statement taken argument has a type of <type>
 
     Examples: Statements with takes
         | directory          | file                                             | type              |
