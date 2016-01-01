@@ -9,5 +9,6 @@ Feature: Can create Statement Handler class
         Then the code looks like "<code file>"
 
     Examples:
-        | name      | path       | statement file           | code file                  |
-        | Statement | statements | statements/statement.sql | code/StatementHandler.java |
+        | name      | path       | statement file           | code file                                |
+        | Statement | statements | statements/statement.sql | code/StatementHandler.java               |
+        | Statement |            | statements/statement.sql | code/StatementHandlerWithoutPackage.java |
