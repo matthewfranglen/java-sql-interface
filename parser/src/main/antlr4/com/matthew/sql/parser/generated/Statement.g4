@@ -33,6 +33,17 @@ argument_list
 ;
 
 argument
+: argument_type WS+ argument_name
+;
+
+argument_type
+: TEXT_TYPE
+| WHOLE_NUMBER_TYPE
+| FRACTIONAL_NUMBER_TYPE
+| TIMESTAMP_TYPE
+;
+
+argument_name
 : CHAR+
 ;
 
@@ -71,6 +82,24 @@ TAKES_LABEL
 
 RETURNS_LABEL
 : 'returns:'
+;
+
+TEXT_TYPE
+: 'Text'
+;
+
+WHOLE_NUMBER_TYPE
+: 'Integer'
+| 'Long'
+;
+
+FRACTIONAL_NUMBER_TYPE
+: 'Float'
+| 'Double'
+;
+
+TIMESTAMP_TYPE
+: 'Date'
 ;
 
 CHAR
