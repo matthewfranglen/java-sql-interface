@@ -19,6 +19,7 @@ public class SqlStatement {
     public SqlStatement(String name, String path, String statement, Collection<Argument> takes, Collection<Argument> returns) {
         checkArgument(! Strings.isNullOrEmpty(name), "name is null or blank");
         checkArgument(! Strings.isNullOrEmpty(statement), "statement is null or blank");
+        checkArgument(path != null, "path is null");
 
         this.name = name.trim();
         this.path = stripLeadingSlash(path).trim();
