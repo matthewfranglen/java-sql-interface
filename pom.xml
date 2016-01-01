@@ -36,11 +36,8 @@
                     <!-- aggregated reports for multi-module projects -->
                     <aggregate>true</aggregate>
                     <instrumentation>
-                        <ignores>
-                            <ignore>com.matthew.sql.compiler.HelpMojo</ignore>
-                        </ignores>
                         <excludes>
-                            <exclude>com/matthew/sql/compiler/HelpMojo</exclude>
+                            <exclude>com/matthew/sql/compiler/HelpMojo.class</exclude>
                         </excludes>
                     </instrumentation>
                 </configuration>
