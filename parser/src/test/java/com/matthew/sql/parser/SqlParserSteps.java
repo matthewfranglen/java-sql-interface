@@ -56,6 +56,16 @@ public class SqlParserSteps {
         }
     }
 
+    @Then("^the loaded statement returns (\\d+) arguments$")
+    public void thenTheLoadedStatementReturnsArguments(int count) {
+        if (count > 0) {
+            assertEquals(count, statement.getReturns().size());
+        }
+        else {
+            assertEquals(null, statement.getReturns());
+        }
+    }
+
     @Then("^the loaded statement body is \"(.*)\"$")
     public void thenTheLoadedStatementBodyIs(String body) {
         assertEquals(body, statement.getStatement());
