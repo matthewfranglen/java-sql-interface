@@ -5,7 +5,7 @@ root
 ;
 
 entry
-: metadata? statement
+: metadata? blank_line* statement
 ;
 
 metadata
