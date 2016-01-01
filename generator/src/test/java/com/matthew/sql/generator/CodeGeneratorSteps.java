@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.Resources;
-import com.matthew.sql.parser.SqlStatement;
+import com.matthew.sql.statement.SqlStatement;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;

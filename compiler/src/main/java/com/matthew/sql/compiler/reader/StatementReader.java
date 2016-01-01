@@ -8,8 +8,8 @@ import java.util.Collection;
 import org.codehaus.plexus.util.FileUtils;
 
 import com.google.common.base.Joiner;
-import com.matthew.sql.parser.SqlStatement;
 import com.matthew.sql.parser.SqlStatementLoader;
+import com.matthew.sql.statement.SqlStatement;
 
 public class StatementReader {
 

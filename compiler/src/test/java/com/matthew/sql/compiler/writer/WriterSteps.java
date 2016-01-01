@@ -14,14 +14,13 @@ import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import com.matthew.sql.compiler.reader.StatementReader;
-import com.matthew.sql.parser.SqlStatement;
+import com.matthew.sql.statement.SqlStatement;
 
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
 import freemarker.template.TemplateException;
 
 public class WriterSteps {

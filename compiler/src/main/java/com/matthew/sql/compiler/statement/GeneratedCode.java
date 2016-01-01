@@ -1,6 +1,6 @@
 package com.matthew.sql.compiler.statement;
 
-import com.matthew.sql.parser.SqlStatement;
+import com.matthew.sql.statement.SqlStatement;
 
 public class GeneratedCode {
 

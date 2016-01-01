@@ -11,13 +11,15 @@ import com.google.common.io.Files;
 import com.google.common.io.Resources;
 import com.matthew.sql.name.CamelCaseConverter;
 import com.matthew.sql.name.SeparatorConverter;
+import com.matthew.sql.statement.SqlStatement;
+import com.matthew.sql.statement.SqlStatementBuilder;
 
 public class SqlStatementLoader {
 
     private static final SeparatorConverter skewerConverter = new SeparatorConverter("-");
     private static final CamelCaseConverter camelCaseConverter = new CamelCaseConverter();
 
-    private SqlParser parser;
+    private final SqlParser parser;
 
     public SqlStatementLoader() {
         parser = new SqlParser();
@@ -53,7 +55,7 @@ public class SqlStatementLoader {
     private SqlStatement makeStatement(String rootDirectory, String directory, String file, String content) {
         String name = toName(file);
         String path = toRelativePath(rootDirectory, directory);
-        SqlStatement.Builder builder = parser.parse(content);
+        SqlStatementBuilder builder = parser.parse(content);
 
         builder.setName(name);
         builder.setPath(path);

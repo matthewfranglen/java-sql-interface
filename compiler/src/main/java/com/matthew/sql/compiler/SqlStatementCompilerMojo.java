@@ -16,7 +16,7 @@ import org.apache.maven.project.MavenProject;
 import com.matthew.sql.compiler.reader.StatementReader;
 import com.matthew.sql.compiler.writer.StatementHandlerWriter;
 import com.matthew.sql.compiler.writer.StatementWriter;
-import com.matthew.sql.parser.SqlStatement;
+import com.matthew.sql.statement.SqlStatement;
 
 @Mojo(name="compile", defaultPhase=LifecyclePhase.GENERATE_SOURCES)
 public class SqlStatementCompilerMojo extends AbstractMojo {

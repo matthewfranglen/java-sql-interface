@@ -5,10 +5,11 @@ import org.antlr.v4.runtime.CommonTokenStream;
 
 import com.matthew.sql.parser.generated.StatementLexer;
 import com.matthew.sql.parser.generated.StatementParser;
+import com.matthew.sql.statement.SqlStatementBuilder;
 
 public class SqlParser {
 
-    public SqlStatement.Builder parse(String content) {
+    public SqlStatementBuilder parse(String content) {
         StatementLexer lexer = new StatementLexer(new ANTLRInputStream(content));
         StatementParser parser = new StatementParser(new CommonTokenStream(lexer));
         StatementBuildingListener listener = new StatementBuildingListener();
@@ -18,6 +19,5 @@ public class SqlParser {
 
         return listener.getBuilder();
     }
-
 
 }

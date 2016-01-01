@@ -1,4 +1,4 @@
-package com.matthew.sql.parser;
+package com.matthew.sql.statement;
 
 import static com.google.common.base.Preconditions.checkArgument;
 
@@ -16,13 +16,13 @@ public class SqlStatement {
         checkArgument(! Strings.isNullOrEmpty(name), "name is null or blank");
         checkArgument(! Strings.isNullOrEmpty(statement), "statement is null or blank");
 
-        if (path.startsWith("/")) {
-            path = path.substring(1);
-        }
-
         this.name = name.trim();
-        this.path = path.trim();
+        this.path = stripLeadingSlash(path).trim();
         this.statement = statement.trim();
+    }
+
+    private String stripLeadingSlash(String path) {
+        return path.startsWith("/") ? path.substring(1) : path;
     }
 
     public String getName() {
@@ -31,6 +31,10 @@ public class SqlStatement {
 
     public String getPath() {
         return path;
+    }
+
+    public String getStatement() {
+        return statement;
     }
 
     public boolean inDefaultPackage() {
@@ -44,30 +48,4 @@ public class SqlStatement {
         return path.replaceAll(File.separator, ".");
     }
 
-    public String getStatement() {
-        return statement;
-    }
-
-    public static class Builder {
-
-        private String name;
-        private String path;
-        private String statement;
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public void setPath(String path) {
-            this.path = path;
-        }
-
-        public void setStatement(String statement) {
-            this.statement = statement;
-        }
-
-        public SqlStatement build() {
-            return new SqlStatement(name, path, statement);
-        }
-    }
 }

@@ -2,16 +2,17 @@ package com.matthew.sql.parser;
 
 import com.matthew.sql.parser.generated.StatementBaseListener;
 import com.matthew.sql.parser.generated.StatementParser;
+import com.matthew.sql.statement.SqlStatementBuilder;
 
 public class StatementBuildingListener extends StatementBaseListener {
 
-    private final SqlStatement.Builder builder;
+    private final SqlStatementBuilder builder;
 
     public StatementBuildingListener() {
-        builder = new SqlStatement.Builder();
+        builder = new SqlStatementBuilder();
     }
 
-    public SqlStatement.Builder getBuilder() {
+    public SqlStatementBuilder getBuilder() {
         return builder;
     }
 

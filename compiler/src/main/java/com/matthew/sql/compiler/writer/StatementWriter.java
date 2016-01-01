@@ -8,7 +8,7 @@ import org.apache.maven.plugin.logging.Log;
 
 import com.matthew.sql.compiler.statement.GeneratedCode;
 import com.matthew.sql.generator.CodeGenerator;
-import com.matthew.sql.parser.SqlStatement;
+import com.matthew.sql.statement.SqlStatement;
 
 import freemarker.core.ParseException;
 import freemarker.template.TemplateException;
