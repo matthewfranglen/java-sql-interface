@@ -50,6 +50,7 @@
                 <version>4.1.0</version>
                 <configuration>
                     <repoToken>${env.coveralls_repo_token}</repoToken>
+                    <scanForSources>true</scanForSources>
                 </configuration>
             </plugin>
         </plugins>
