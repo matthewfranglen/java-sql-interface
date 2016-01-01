@@ -58,10 +58,26 @@ public class WriterSteps {
         writer.writeStatements(statements);
     }
 
+    @When("^the statement handler is written to a file$")
+    public void whenTheStatementHandlerIsWrittenToAFile() throws IOException, TemplateException {
+        generatedSourcesDirectory = temporaryFileManager.makeTemporaryFolder();
+        StatementHandlerWriter writer = new StatementHandlerWriter(mock(Log.class), generatedSourcesDirectory.getCanonicalPath());
+
+        writer.writeStatementHandler(statements);
+    }
+
     @Then("^the file at \"(.*)\" looks like the resource \"(.*)\"$")
     public void thenTheFileLooksLike(String path, String resource) throws IOException {
         String expected = Resources.toString(Resources.getResource(resource), Charsets.UTF_8);
         String actual = Files.toString(new File(generatedSourcesDirectory, path), Charsets.UTF_8);
+
+        assertEquals(expected, actual);
+    }
+
+    @Then("^the statement handler file looks like the resource \"(.*)\"$")
+    public void thenTheStatementHandlerFileLooksLikeTheResource(String resource) throws IOException {
+        String expected = Resources.toString(Resources.getResource(resource), Charsets.UTF_8);
+        String actual = Files.toString(new File(generatedSourcesDirectory, StatementHandlerWriter.STATEMENT_HANDLER_PATH), Charsets.UTF_8);
 
         assertEquals(expected, actual);
     }
