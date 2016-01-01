@@ -1,6 +1,7 @@
 package com.matthew.sql.compiler.writer;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Collection;
 
 import org.apache.maven.plugin.logging.Log;
@@ -8,7 +9,11 @@ import org.apache.maven.plugin.logging.Log;
 import com.matthew.sql.generator.CodeGenerator;
 import com.matthew.sql.parser.SqlStatement;
 
+import freemarker.template.TemplateException;
+
 public class StatementHandlerWriter extends AbstractWriter {
+
+    public static final String STATEMENT_HANDLER_PATH = "com/matthew/sql/generated/SqlStatementHandler.java";
 
     private final CodeGenerator generator;
 
@@ -21,9 +26,8 @@ public class StatementHandlerWriter extends AbstractWriter {
         generator = new CodeGenerator();
     }
 
-    public void writeStatementHandler(Collection<SqlStatement> statements) throws Exception {
-        String path = "com/matthew/sql/generated/SqlStatementHandler.java";
-        File file = new File(generatedSourcesDirectory, path);
+    public void writeStatementHandler(Collection<SqlStatement> statements) throws IOException, TemplateException {
+        File file = new File(generatedSourcesDirectory, STATEMENT_HANDLER_PATH);
         String code = generator.generateStatementHandlerCode(statements);
 
         write(file, code);
