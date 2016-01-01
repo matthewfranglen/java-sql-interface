@@ -20,4 +20,5 @@ public class StatementBuildingListener extends StatementBaseListener {
     public void exitStatement(StatementParser.StatementContext ctx) {
         builder.setStatement(ctx.getText());
     }
+
 }
