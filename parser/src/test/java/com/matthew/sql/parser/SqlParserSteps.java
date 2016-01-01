@@ -49,7 +49,12 @@ public class SqlParserSteps {
 
     @Then("^the loaded statement takes (\\d+) arguments$")
     public void thenTheLoadedStatementTakesSomeArguments(int count) {
-        throw new PendingException();
+        if (count > 0) {
+            assertEquals(count, statement.getTakes().size());
+        }
+        else {
+            assertEquals(null, statement.getTakes());
+        }
     }
 
     @Then("^the loaded statement body is \"(.*)\"$")
