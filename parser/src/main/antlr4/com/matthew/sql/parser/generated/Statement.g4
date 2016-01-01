@@ -9,7 +9,7 @@ entry
 ;
 
 metadata
-: ( comment_line | blank_line )+
+: ( takes_line | comment_line | blank_line )+
 ;
 
 statement
@@ -18,6 +18,10 @@ statement
 
 comment_line
 : COMMENT line
+;
+
+takes_line
+: COMMENT WS* TAKES_LABEL line
 ;
 
 line
@@ -39,6 +43,10 @@ SEPARATOR
 
 COMMENT
 : '--'
+;
+
+TAKES_LABEL
+: 'takes:'
 ;
 
 CHAR
