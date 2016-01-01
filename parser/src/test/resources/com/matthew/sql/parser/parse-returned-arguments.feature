@@ -4,14 +4,20 @@ Feature: Can read SQL Statement returns
 
         Given the resource "<file>"
         When the resource is loaded as a statement
-        Then the loaded statement returns <count> arguments
+        Then the loaded statement takes does not have a list of returned arguments
 
     Examples: Statements without returns
-        | file                                  | count |
-        | statements/statement-by-name.sql      | 0     |
-        | statements/statement-with-comment.sql | 0     |
-        | statements/statement.sql              | 0     |
-        | statement.sql                         | 0     |
+        | file                                  |
+        | statements/statement-by-name.sql      |
+        | statements/statement-with-comment.sql |
+        | statements/statement.sql              |
+        | statement.sql                         |
+
+    Scenario Outline: Reading from different resources
+
+        Given the resource "<file>"
+        When the resource is loaded as a statement
+        Then the loaded statement returns <count> arguments
 
     Examples: Statements with returns
         | file                                                | count |
@@ -27,14 +33,20 @@ Feature: Can read SQL Statement returns
 
         Given the file "<file>" and the directory "<directory>"
         When the file is loaded as a statement
-        Then the loaded statement returns <count> arguments
+        Then the loaded statement takes does not have a list of returned arguments
 
     Examples: Statements without returns
-        | directory          | file                                  | count |
-        | src/test/resources | statements/statement-by-name.sql      | 0     |
-        | src/test/resources | statements/statement-with-comment.sql | 0     |
-        | src/test/resources | statements/statement.sql              | 0     |
-        | src/test/resources | statement.sql                         | 0     |
+        | directory          | file                                  |
+        | src/test/resources | statements/statement-by-name.sql      |
+        | src/test/resources | statements/statement-with-comment.sql |
+        | src/test/resources | statements/statement.sql              |
+        | src/test/resources | statement.sql                         |
+
+    Scenario Outline: Reading from different files
+
+        Given the file "<file>" and the directory "<directory>"
+        When the file is loaded as a statement
+        Then the loaded statement returns <count> arguments
 
     Examples: Statements with returns
         | directory          | file                                                | count |

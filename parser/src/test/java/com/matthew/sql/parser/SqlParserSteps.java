@@ -1,6 +1,7 @@
 package com.matthew.sql.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,22 +49,22 @@ public class SqlParserSteps {
 
     @Then("^the loaded statement takes (\\d+) arguments$")
     public void thenTheLoadedStatementTakesSomeArguments(int count) {
-        if (count > 0) {
-            assertEquals(count, statement.getTakes().size());
-        }
-        else {
-            assertEquals(null, statement.getTakes());
-        }
+        assertEquals(count, statement.getTakes().size());
+    }
+
+    @Then("^the loaded statement takes does not have a list of taken arguments$")
+    public void thenTheLoadedStatementTakesDoesNotHaveAListOfTakenArguments() {
+        assertFalse(statement.hasTakes());
+    }
+
+    @Then("^he loaded statement takes does not have a list of returned arguments$")
+    public void thenTheLoadedStatementTakesDoesNotHaveAListOfReturnedArguments() {
+        assertFalse(statement.hasReturns());
     }
 
     @Then("^the loaded statement returns (\\d+) arguments$")
     public void thenTheLoadedStatementReturnsArguments(int count) {
-        if (count > 0) {
-            assertEquals(count, statement.getReturns().size());
-        }
-        else {
-            assertEquals(null, statement.getReturns());
-        }
+        assertEquals(count, statement.getReturns().size());
     }
 
     @Then("^the loaded statement body is \"(.*)\"$")
