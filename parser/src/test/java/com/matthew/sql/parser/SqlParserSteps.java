@@ -47,8 +47,8 @@ public class SqlParserSteps {
         statement = loader.parseResource(resource);
     }
 
-    @Then("^the loaded statement argument count is (\\d+)$")
-    public void thenTheLoadedStatementArgumentCountIs(int count) {
+    @Then("^the loaded statement takes (\\d+) arguments$")
+    public void thenTheLoadedStatementTakesSomeArguments(int count) {
         throw new PendingException();
     }
 
