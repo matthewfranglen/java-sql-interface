@@ -57,7 +57,7 @@ public class SqlParserSteps {
         assertFalse(statement.hasTakes());
     }
 
-    @Then("^he loaded statement takes does not have a list of returned arguments$")
+    @Then("^the loaded statement takes does not have a list of returned arguments$")
     public void thenTheLoadedStatementTakesDoesNotHaveAListOfReturnedArguments() {
         assertFalse(statement.hasReturns());
     }
