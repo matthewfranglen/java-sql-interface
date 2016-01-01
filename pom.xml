@@ -37,7 +37,7 @@
                     <aggregate>true</aggregate>
                     <instrumentation>
                         <excludes>
-                            <exclude>com/matthew/sql/compiler/HelpMojo.class</exclude>
+                            <exclude>compiler/target/generated-sources/plugin/com/matthew/sql/compiler/HelpMojo.java</exclude>
                         </excludes>
                     </instrumentation>
                 </configuration>
