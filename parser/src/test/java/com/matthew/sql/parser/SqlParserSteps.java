@@ -7,7 +7,6 @@ import java.io.IOException;
 
 import com.matthew.sql.statement.SqlStatement;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
