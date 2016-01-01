@@ -9,18 +9,18 @@ entry
 ;
 
 metadata
-: ( comment_line | whitespace_line )+
+: ( comment_line | blank_line )+
 ;
 
 statement
-: statement_line ( statement_line | whitespace_line )*
+: statement_line ( statement_line | blank_line )*
 ;
 
 comment_line
 : COMMENT ( CHAR | WS )* EOL
 ;
 
-whitespace_line
+blank_line
 : WS* EOL
 ;
 
