@@ -13,7 +13,7 @@ metadata
 ;
 
 statement
-: nonblank_line ( nonblank_line | blank_line )*
+: nonblank_line line*
 ;
 
 comment_line
@@ -26,6 +26,11 @@ blank_line
 
 nonblank_line
 : WS* CHAR ( CHAR | WS )* EOL
+;
+
+line
+: blank_line
+| nonblank_line
 ;
 
 SEPARATOR
