@@ -42,7 +42,7 @@ nonblank_line
 ;
 
 SEPARATOR
-: ':'
+: ','
 ;
 
 COMMENT
