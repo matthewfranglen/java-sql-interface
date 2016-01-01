@@ -9,7 +9,7 @@ entry
 ;
 
 metadata
-: ( takes_line | comment_line | blank_line )+
+: ( takes_line | returns_line | comment_line | blank_line )+
 ;
 
 statement
@@ -22,6 +22,10 @@ comment_line
 
 takes_line
 : COMMENT WS* TAKES_LABEL line
+;
+
+returns_line
+: COMMENT WS* RETURNS_LABEL line
 ;
 
 line
@@ -47,6 +51,10 @@ COMMENT
 
 TAKES_LABEL
 : 'takes:'
+;
+
+RETURNS_LABEL
+: 'returns:'
 ;
 
 CHAR
