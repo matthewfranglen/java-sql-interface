@@ -5,7 +5,7 @@ public class Argument {
 	private final ArgumentType type;
 	private final String name;
 
-    public Argument(ArgumentType type, String name) { 
+    public Argument(ArgumentType type, String name) {
 		this.type = type;
 		this.name = name;
     }

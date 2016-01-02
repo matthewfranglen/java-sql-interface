@@ -9,6 +9,6 @@ Feature: Can create Statement class
         Then the code looks like "<code file>"
 
     Examples:
-        | name      | path       | statement file           | code file           |
-        | Statement | statements | statements/statement.sql | code/Statement.java |
+        | name      | path       | statement file           | code file                         |
+        | Statement | statements | statements/statement.sql | code/Statement.java               |
         | Statement |            | statements/statement.sql | code/StatementWithoutPackage.java |
