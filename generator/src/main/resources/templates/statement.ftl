@@ -5,7 +5,7 @@ package ${package.name};
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import com.matthew.sql.handler.AbstractStatement;
 
-public class ${name.short} extends AbstractStatement {
+public final class ${name.short} extends AbstractStatement {
 
     <@compress single_line=true>private static final String statement = "${statement}";</@compress>
 
