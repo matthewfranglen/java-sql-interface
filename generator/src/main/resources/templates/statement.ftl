@@ -16,22 +16,39 @@ public final class ${name.short} extends AbstractStatement {
     protected String getStatement() {
         return statement;
     }
+
+<#if takes.isDefined && returns.isDefined>
+    public List<${returns.type}> query(${takes.asParameters}) {
+
+    }
+
+<#if takes.isMultiple>
+    public List<${returns.type}> query(${takes.type} parameters) {
+        return query(<#list takes.arguments as argument>parameters.get${argument.capitalizedName}()<#sep>, </#sep></#list>);
+    }
+</#if>
+<#elseif takes.isDefined>
+
+<#elseif returns.isDefined>
+
+</#if>
+
 <#list [takes, returns] as interface>
 <#if interface.isMultiple>
 
     public static final class ${interface.type} {
     <#list interface.arguments as argument>
-        private final ${argument.javaType} ${argument.name};
+        private final ${argument.type.javaType} ${argument.name};
     </#list>
 
-        public ${interface.type}(<#list interface.arguments as argument>${argument.javaType} ${argument.name}<#sep>, </#sep></#list>) {
+        public ${interface.type}(${interface.asParameters}) {
         <#list interface.arguments as argument>
             this.${argument.name} = ${argument.name};
         </#list>
         }
 
     <#list interface.arguments as argument>
-        public ${argument.javaType} get${argument.capitalizedName}() {
+        public ${argument.type.javaType} get${argument.capitalizedName}() {
             return ${argument.name};
         }
     </#list>

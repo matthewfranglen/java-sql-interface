@@ -22,4 +22,8 @@ public class Argument {
 		return type;
 	}
 
+    public String toString() {
+        return type.getJavaType() + " " + name;
+    }
+
 }

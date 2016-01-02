@@ -5,8 +5,10 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Joiner;
 import com.matthew.sql.statement.Argument;
 import com.matthew.sql.statement.SqlStatement;
 
@@ -145,6 +147,8 @@ public class CodeGenerator {
         result.put("isEmpty", arguments.isEmpty());
         result.put("isSingle", arguments.size() == 1);
         result.put("isMultiple", arguments.size() > 1);
+        result.put("asParameters", makeParameterList(arguments));
+        result.put("asArguments", makeArgumentList(arguments));
 
         if (arguments.size() == 1) {
             Argument argument = arguments.iterator().next();
@@ -157,6 +161,34 @@ public class CodeGenerator {
         }
 
         return result;
+    }
+
+    private String makeParameterList(Collection<Argument> arguments) {
+        if (arguments.isEmpty()) {
+            return "";
+        }
+
+        List<String> argumentStrings = new ArrayList<>();
+
+        for (Argument current : arguments) {
+            argumentStrings.add(current.toString());
+        }
+
+        return Joiner.on(", ").join(argumentStrings);
+    }
+
+    private String makeArgumentList(Collection<Argument> arguments) {
+        if (arguments.isEmpty()) {
+            return "";
+        }
+
+        List<String> argumentStrings = new ArrayList<>();
+
+        for (Argument current : arguments) {
+            argumentStrings.add(current.getName());
+        }
+
+        return Joiner.on(", ").join(argumentStrings);
     }
 
 }
