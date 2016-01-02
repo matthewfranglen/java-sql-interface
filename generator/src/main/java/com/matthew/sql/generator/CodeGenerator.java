@@ -86,27 +86,27 @@ public class CodeGenerator {
     }
 
     private Map<String, ?> makeStatementName(SqlStatement statement) {
-        Map<String, String> name = new HashMap<>();
+        Map<String, String> result = new HashMap<>();
 
         if (statement.inDefaultPackage()) {
-            name.put("full", statement.getName());
+            result.put("full", statement.getName());
         }
         else {
-            name.put("full", statement.getPackage() + "." + statement.getName());
+            result.put("full", statement.getPackage() + "." + statement.getName());
         }
 
-        name.put("short", statement.getName());
+        result.put("short", statement.getName());
 
-        return name;
+        return result;
     }
 
     private Map<String, ?> makeStatementPackage(SqlStatement statement) {
-        Map<String, Object> _package = new HashMap<>();
+        Map<String, Object> result = new HashMap<>();
 
-        _package.put("isDefault", statement.inDefaultPackage());
-        _package.put("name", statement.getPackage());
+        result.put("isDefault", statement.inDefaultPackage());
+        result.put("name", statement.getPackage());
 
-        return _package;
+        return result;
     }
 
     private Map<String, ?> makeStatementTakes(SqlStatement statement) {
