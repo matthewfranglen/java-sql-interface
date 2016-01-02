@@ -7,6 +7,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.matthew.sql.statement.Argument;
 import com.matthew.sql.statement.SqlStatement;
 
 import freemarker.core.ParseException;
@@ -78,6 +79,8 @@ public class CodeGenerator {
         parameters.put("name", makeStatementName(statement));
         parameters.put("package", makeStatementPackage(statement));
         parameters.put("statement", statement.getStatement());
+        parameters.put("takes", makeStatementTakes(statement));
+        parameters.put("returns", makeStatementReturns(statement));
 
         return parameters;
     }
@@ -104,6 +107,37 @@ public class CodeGenerator {
         _package.put("name", statement.getPackage());
 
         return _package;
+    }
+
+    private Map<String, ?> makeStatementTakes(SqlStatement statement) {
+        return makeStatementArguments(statement.getTakes());
+    }
+
+    private Map<String, ?> makeStatementReturns(SqlStatement statement) {
+        return makeStatementArguments(statement.getReturns());
+    }
+
+    private Map<String, ?> makeStatementArguments(Collection<Argument> arguments) {
+        Map<String, Object> result = new HashMap<>();
+
+        if (arguments == null) {
+            result.put("isDefined", false);
+            return result;
+        }
+
+        result.put("isDefined", true);
+        result.put("isEmpty", arguments.isEmpty());
+        result.put("isSingle", arguments.size() == 1);
+        result.put("isMultiple", arguments.size() > 1);
+
+        if (arguments.size() == 1) {
+            result.put("argument", arguments.iterator().next());
+        }
+        else {
+            result.put("arguments", arguments);
+        }
+
+        return result;
     }
 
 }
