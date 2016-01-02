@@ -14,6 +14,10 @@ public class Argument {
 		return name;
 	}
 
+    public String getCapitalizedName() {
+        return name.substring(0, 1).toUpperCase() + name.substring(1);
+    }
+
 	public ArgumentType getType() {
 		return type;
 	}
