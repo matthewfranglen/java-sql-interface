@@ -76,8 +76,7 @@ public class CodeGenerator {
         Map<String, Object> parameters = new HashMap<>();
 
         parameters.put("name", makeStatementName(statement));
-        parameters.put("hasPackage", ! statement.inDefaultPackage());
-        parameters.put("package", statement.getPackage());
+        parameters.put("package", makeStatementPackage(statement));
         parameters.put("statement", statement.getStatement());
 
         return parameters;
@@ -96,6 +95,15 @@ public class CodeGenerator {
         name.put("short", statement.getName());
 
         return name;
+    }
+
+    private Map<String, ?> makeStatementPackage(SqlStatement statement) {
+        Map<String, Object> _package = new HashMap<>();
+
+        _package.put("isDefault", statement.inDefaultPackage());
+        _package.put("name", statement.getPackage());
+
+        return _package;
     }
 
 }

@@ -1,5 +1,5 @@
-<#if hasPackage>
-package ${package};
+<#if ! package.isDefault>
+package ${package.name};
 </#if>
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
