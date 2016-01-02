@@ -110,18 +110,34 @@ public class CodeGenerator {
     }
 
     private Map<String, ?> makeStatementTakes(SqlStatement statement) {
-        return makeStatementArguments(statement.getTakes());
+        Map<String, Object> result = makeStatementArguments(statement.getTakes());
+
+        if ((Boolean)result.get("isMultiple")) {
+            result.put("type", "Takes");
+        }
+
+        return result;
     }
 
     private Map<String, ?> makeStatementReturns(SqlStatement statement) {
-        return makeStatementArguments(statement.getReturns());
+        Map<String, Object> result = makeStatementArguments(statement.getReturns());
+
+        if ((Boolean)result.get("isMultiple")) {
+            result.put("type", "Returns");
+        }
+
+        return result;
     }
 
-    private Map<String, ?> makeStatementArguments(Collection<Argument> arguments) {
+    private Map<String, Object> makeStatementArguments(Collection<Argument> arguments) {
         Map<String, Object> result = new HashMap<>();
 
         if (arguments == null) {
             result.put("isDefined", false);
+            result.put("isEmpty", false);
+            result.put("isSingle", false);
+            result.put("isMultiple", false);
+
             return result;
         }
 
@@ -131,7 +147,10 @@ public class CodeGenerator {
         result.put("isMultiple", arguments.size() > 1);
 
         if (arguments.size() == 1) {
-            result.put("argument", arguments.iterator().next());
+            Argument argument = arguments.iterator().next();
+
+            result.put("argument", argument);
+            result.put("type", argument.getType().getJavaType());
         }
         else {
             result.put("arguments", arguments);

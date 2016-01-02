@@ -16,5 +16,13 @@ public final class ${name.short} extends AbstractStatement {
     protected String getStatement() {
         return statement;
     }
+<#list [takes, returns] as argument>
+<#if argument.isMultiple>
+
+    public static final class ${argument.type} {
+
+    }
+</#if>
+</#list>
 
 }
