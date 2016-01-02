@@ -16,10 +16,6 @@
         <relativePath>../parent/pom.xml</relativePath>
     </parent>
 
-    <properties>
-        <freemarker.version>2.3.22</freemarker.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>com.matthew.java-sql-interface</groupId>
@@ -30,7 +26,6 @@
         <dependency>
             <groupId>org.freemarker</groupId>
             <artifactId>freemarker</artifactId>
-            <version>${freemarker.version}</version>
         </dependency>
 
         <dependency>
