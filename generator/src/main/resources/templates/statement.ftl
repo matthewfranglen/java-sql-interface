@@ -16,11 +16,25 @@ public final class ${name.short} extends AbstractStatement {
     protected String getStatement() {
         return statement;
     }
-<#list [takes, returns] as argument>
-<#if argument.isMultiple>
+<#list [takes, returns] as interface>
+<#if interface.isMultiple>
 
-    public static final class ${argument.type} {
+    public static final class ${interface.type} {
+    <#list interface.arguments as argument>
+        private final ${argument.javaType} ${argument.name};
+    </#list>
 
+        public ${interface.type}(<#list interface.arguments as argument>${argument.javaType} ${argument.name}<#sep>, </#sep></#list>) {
+        <#list interface.arguments as argument>
+            this.${argument.name} = ${argument.name};
+        </#list>
+        }
+
+    <#list interface.arguments as argument>
+        public ${argument.javaType} get${argument.capitalizedName}() {
+            return ${argument.name};
+        }
+    </#list>
     }
 </#if>
 </#list>
