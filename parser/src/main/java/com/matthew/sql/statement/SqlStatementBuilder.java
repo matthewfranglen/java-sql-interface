@@ -70,6 +70,9 @@ public class SqlStatementBuilder {
             takes = current.build();
             current = null;
         }
+        else {
+            takes = new ArgumentListBuilder().build();
+        }
     }
 
     public void exitReturns() {
@@ -79,6 +82,9 @@ public class SqlStatementBuilder {
         if (current != null) {
             returns = current.build();
             current = null;
+        }
+        else {
+            returns = new ArgumentListBuilder().build();
         }
     }
 
