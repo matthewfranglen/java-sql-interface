@@ -20,14 +20,15 @@ Feature: Can read SQL Statement returns
         Then the loaded statement returns <count> arguments
 
     Examples: Statements with returns
-        | file                                                | count |
-        | statements/statement-returning-no-arguments.sql     | 0     |
-        | statements/statement-returning-date-argument.sql    | 1     |
-        | statements/statement-returning-double-argument.sql  | 1     |
-        | statements/statement-returning-float-argument.sql   | 1     |
-        | statements/statement-returning-integer-argument.sql | 1     |
-        | statements/statement-returning-long-argument.sql    | 1     |
-        | statements/statement-returning-text-argument.sql    | 1     |
+        | file                                                             | count |
+        | statements/statement-returning-no-arguments.sql                  | 0     |
+        | statements/statement-returning-date-argument.sql                 | 1     |
+        | statements/statement-returning-double-argument.sql               | 1     |
+        | statements/statement-returning-float-argument.sql                | 1     |
+        | statements/statement-returning-integer-argument.sql              | 1     |
+        | statements/statement-returning-long-argument.sql                 | 1     |
+        | statements/statement-returning-text-argument.sql                 | 1     |
+        | statements/statement-taking-and-returning-multiple-arguments.sql | 6     |
 
     Scenario Outline: Reading from different files
 
@@ -49,11 +50,12 @@ Feature: Can read SQL Statement returns
         Then the loaded statement returns <count> arguments
 
     Examples: Statements with returns
-        | directory          | file                                                | count |
-        | src/test/resources | statements/statement-returning-no-arguments.sql     | 0     |
-        | src/test/resources | statements/statement-returning-date-argument.sql    | 1     |
-        | src/test/resources | statements/statement-returning-double-argument.sql  | 1     |
-        | src/test/resources | statements/statement-returning-float-argument.sql   | 1     |
-        | src/test/resources | statements/statement-returning-integer-argument.sql | 1     |
-        | src/test/resources | statements/statement-returning-long-argument.sql    | 1     |
-        | src/test/resources | statements/statement-returning-text-argument.sql    | 1     |
+        | directory          | file                                                             | count |
+        | src/test/resources | statements/statement-returning-no-arguments.sql                  | 0     |
+        | src/test/resources | statements/statement-returning-date-argument.sql                 | 1     |
+        | src/test/resources | statements/statement-returning-double-argument.sql               | 1     |
+        | src/test/resources | statements/statement-returning-float-argument.sql                | 1     |
+        | src/test/resources | statements/statement-returning-integer-argument.sql              | 1     |
+        | src/test/resources | statements/statement-returning-long-argument.sql                 | 1     |
+        | src/test/resources | statements/statement-returning-text-argument.sql                 | 1     |
+        | src/test/resources | statements/statement-taking-and-returning-multiple-arguments.sql | 6     |
