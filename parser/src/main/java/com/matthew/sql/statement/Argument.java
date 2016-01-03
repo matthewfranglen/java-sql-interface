@@ -14,16 +14,24 @@ public class Argument {
 		return name;
 	}
 
-    public String getCapitalizedName() {
-        return name.substring(0, 1).toUpperCase() + name.substring(1);
+    public String getGetterName() {
+        return "get" + getCapitalizedName();
     }
 
 	public ArgumentType getType() {
 		return type;
 	}
 
+    public String getJavaType() {
+        return type.getJavaType();
+    }
+
     public String toString() {
-        return type.getJavaType() + " " + name;
+        return getJavaType() + " " + getName();
+    }
+
+    private String getCapitalizedName() {
+        return name.substring(0, 1).toUpperCase() + name.substring(1);
     }
 
 }
