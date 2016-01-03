@@ -2,6 +2,7 @@ package com.matthew.sql.parser;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -136,6 +137,16 @@ public class SqlParserSteps {
     @Then("^the loaded statement package is \"(.*)\"$")
     public void thenTheLoadedStatementPackageIs(String _package) {
         assertEquals(_package, statement.getName().getPackage());
+    }
+
+    @Then("^the loaded statement is in the default package$")
+    public void thenTheLoadedStatementIsInTheDefaultPackage() {
+        assertTrue(statement.getName().isInDefaultPackage());
+    }
+
+    @Then("^the loaded statement is not in the default package$")
+    public void thenTheLoadedStatementIsNotInTheDefaultPackage() {
+        assertFalse(statement.getName().isInDefaultPackage());
     }
 
     @Then("^the loaded statement path is \"(.*)\"$")
