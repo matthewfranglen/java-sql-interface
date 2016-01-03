@@ -54,9 +54,44 @@ public class SqlParserSteps {
         assertEquals(count, statement.getTakes().size());
     }
 
-    @Then("^the loaded statement takes does not have a list of taken arguments$")
+    @Then("^the loaded statement has a list of taken arguments$")
+    public void thenTheLoadedStatementTakesHasAListOfTakenArguments() {
+        assertTrue(statement.getTakes().isDefined());
+    }
+
+    @Then("^the loaded statement does not have a list of taken arguments$")
     public void thenTheLoadedStatementTakesDoesNotHaveAListOfTakenArguments() {
         assertFalse(statement.getTakes().isDefined());
+    }
+
+    @Then("^the loaded statement taken argument list is an empty list$")
+    public void thenTheLoadedStatementTakenArgumentListIsAnEmptyList() {
+        assertTrue(statement.getTakes().isEmpty());
+    }
+
+    @Then("^the loaded statement taken argument list is not an empty list$")
+    public void thenTheLoadedStatementTakenArgumentListIsNotAnEmptyList() {
+        assertFalse(statement.getTakes().isEmpty());
+    }
+
+    @Then("^the loaded statement taken argument list is a singular list$")
+    public void thenTheLoadedStatementTakenArgumentListIsASingularList() {
+        assertTrue(statement.getTakes().isSingular());
+    }
+
+    @Then("^the loaded statement taken argument list is not a singular list$")
+    public void thenTheLoadedStatementTakenArgumentListIsNotASingularList() {
+        assertFalse(statement.getTakes().isSingular());
+    }
+
+    @Then("^the loaded statement taken argument list is a multiple list$")
+    public void thenTheLoadedStatementTakenArgumentListIsAMultipleList() {
+        assertTrue(statement.getTakes().isMultiple());
+    }
+
+    @Then("^the loaded statement taken argument list is not a multiple list$")
+    public void thenTheLoadedStatementTakenArgumentListIsNotAMultipleList() {
+        assertFalse(statement.getTakes().isMultiple());
     }
 
     @Then("^the loaded statement taken argument has a name of \"(.*)\"$")
@@ -89,9 +124,44 @@ public class SqlParserSteps {
         assertEquals(count, statement.getReturns().size());
     }
 
-    @Then("^the loaded statement takes does not have a list of returned arguments$")
-    public void thenTheLoadedStatementTakesDoesNotHaveAListOfReturnedArguments() {
+    @Then("^the loaded statement has a list of returned arguments$")
+    public void thenTheLoadedStatementHasAListOfReturnedArguments() {
+        assertTrue(statement.getReturns().isDefined());
+    }
+
+    @Then("^the loaded statement does not have a list of returned arguments$")
+    public void thenTheLoadedStatementDoesNotHaveAListOfReturnedArguments() {
         assertFalse(statement.getReturns().isDefined());
+    }
+
+    @Then("^the loaded statement returned argument list is an empty list$")
+    public void thenTheLoadedStatementReturnedArgumentListIsAnEmptyList() {
+        assertTrue(statement.getReturns().isEmpty());
+    }
+
+    @Then("^the loaded statement returned argument list is not an empty list$")
+    public void thenTheLoadedStatementReturnedArgumentListIsNotAnEmptyList() {
+        assertFalse(statement.getReturns().isEmpty());
+    }
+
+    @Then("^the loaded statement returned argument list is a singular list$")
+    public void thenTheLoadedStatementReturnedArgumentListIsASingularList() {
+        assertTrue(statement.getReturns().isSingular());
+    }
+
+    @Then("^the loaded statement returned argument list is not a singular list$")
+    public void thenTheLoadedStatementReturnedArgumentListIsNotASingularList() {
+        assertFalse(statement.getReturns().isSingular());
+    }
+
+    @Then("^the loaded statement returned argument list is a multiple list$")
+    public void thenTheLoadedStatementReturnedArgumentListIsAMultipleList() {
+        assertTrue(statement.getReturns().isMultiple());
+    }
+
+    @Then("^the loaded statement returned argument list is not a multiple list$")
+    public void thenTheLoadedStatementReturnedArgumentListIsNotAMultipleList() {
+        assertFalse(statement.getReturns().isMultiple());
     }
 
     @Then("^the loaded statement returned argument has a name of \"(.*)\"$")
