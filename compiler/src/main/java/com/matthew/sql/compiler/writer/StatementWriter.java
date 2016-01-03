@@ -40,11 +40,11 @@ public class StatementWriter extends AbstractWriter {
     private void writeStatement(GeneratedCode code) throws IOException {
         SqlStatement statement = code.getStatement();
 
-        String path = String.format("%s/%s.java", statement.getPath(), statement.getName());
+        String path = String.format("%s/%s.java", statement.getName().getPath(), statement.getName().getName());
         File file = new File(generatedSourcesDirectory, path);
 
         write(file, code.getCode());
-        getLog().info(String.format("Written Statement: %s.%s", statement.getPackage(), statement.getName()));
+        getLog().info(String.format("Written Statement: %s", statement.getName().getFullName()));
     }
 
 }

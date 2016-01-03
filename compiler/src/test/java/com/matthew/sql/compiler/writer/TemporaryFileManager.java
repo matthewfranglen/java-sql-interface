@@ -21,7 +21,7 @@ public class TemporaryFileManager {
     public void destroy() throws IOException {
         checkState(testFolder != null);
 
-        delete(testFolder.toFile());
+        // delete(testFolder.toFile());
         testFolder = null;
     }
 
