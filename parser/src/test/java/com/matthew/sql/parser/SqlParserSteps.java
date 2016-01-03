@@ -98,6 +98,11 @@ public class SqlParserSteps {
         assertEquals(name, statement.getReturns().getFirst().getName());
     }
 
+    @Then("^the loaded statement returned argument has a getter name of \"(.*)\"$")
+    public void thenTheLoadedStatementReturnedArgumentHasAGetterNameOf(String name) {
+        assertEquals(name, statement.getReturns().getFirst().getName());
+    }
+
     @Then("^the loaded statement returned argument has a type of TEXT$")
     public void thenTheLoadedStatementReturnedArgumentHasATypeOfText() {
         assertEquals(ArgumentType.TEXT, statement.getReturns().getFirst().getType());
