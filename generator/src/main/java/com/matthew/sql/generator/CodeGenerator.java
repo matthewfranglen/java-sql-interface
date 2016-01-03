@@ -2,14 +2,10 @@ package com.matthew.sql.generator;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.google.common.base.Joiner;
-import com.matthew.sql.statement.Argument;
 import com.matthew.sql.statement.SqlStatement;
 
 import freemarker.core.ParseException;
@@ -45,10 +41,10 @@ public class CodeGenerator {
     }
 
     public String generateStatementCode(SqlStatement statement) throws TemplateNotFoundException, MalformedTemplateNameException, TemplateException, ParseException, IOException {
-        return applyTemplate(STATEMENT_TEMPLATE, makeStatementParameters(statement));
+        return applyTemplate(STATEMENT_TEMPLATE, statement);
     }
 
-    private String applyTemplate(String template, Map<String, ?> model) throws TemplateNotFoundException, MalformedTemplateNameException, TemplateException, ParseException, IOException {
+    private String applyTemplate(String template, Object model) throws TemplateNotFoundException, MalformedTemplateNameException, TemplateException, ParseException, IOException {
         StringWriter writer = new StringWriter();
 
         freemarkerConfiguration.getTemplate(template)
@@ -60,135 +56,9 @@ public class CodeGenerator {
     private Map<String, ?> makeStatementHandlerParameters(Collection<SqlStatement> statements) {
         Map<String, Object> parameters = new HashMap<>();
 
-        parameters.put("statements", makeStatementParametersList(statements));
+        parameters.put("statements", statements);
 
         return parameters;
-    }
-
-    private Collection<Map<String, ?>> makeStatementParametersList(Collection<SqlStatement> statements) {
-        Collection<Map<String, ?>> result = new ArrayList<>(statements.size());
-
-        for (SqlStatement current : statements) {
-            result.add(makeStatementParameters(current));
-        }
-
-        return result;
-    }
-
-    private Map<String, ?> makeStatementParameters(SqlStatement statement) {
-        Map<String, Object> parameters = new HashMap<>();
-
-        parameters.put("name", makeStatementName(statement));
-        parameters.put("package", makeStatementPackage(statement));
-        parameters.put("statement", statement.getStatement());
-        parameters.put("takes", makeStatementTakes(statement));
-        parameters.put("returns", makeStatementReturns(statement));
-
-        return parameters;
-    }
-
-    private Map<String, ?> makeStatementName(SqlStatement statement) {
-        Map<String, String> result = new HashMap<>();
-
-        if (statement.inDefaultPackage()) {
-            result.put("full", statement.getName());
-        }
-        else {
-            result.put("full", statement.getPackage() + "." + statement.getName());
-        }
-
-        result.put("short", statement.getName());
-
-        return result;
-    }
-
-    private Map<String, ?> makeStatementPackage(SqlStatement statement) {
-        Map<String, Object> result = new HashMap<>();
-
-        result.put("isDefault", statement.inDefaultPackage());
-        result.put("name", statement.getPackage());
-
-        return result;
-    }
-
-    private Map<String, ?> makeStatementTakes(SqlStatement statement) {
-        Map<String, Object> result = makeStatementArguments(statement.getTakes());
-
-        if ((Boolean)result.get("isMultiple")) {
-            result.put("type", "Takes");
-        }
-
-        return result;
-    }
-
-    private Map<String, ?> makeStatementReturns(SqlStatement statement) {
-        Map<String, Object> result = makeStatementArguments(statement.getReturns());
-
-        if ((Boolean)result.get("isMultiple")) {
-            result.put("type", "Returns");
-        }
-
-        return result;
-    }
-
-    private Map<String, Object> makeStatementArguments(Collection<Argument> arguments) {
-        Map<String, Object> result = new HashMap<>();
-
-        if (arguments == null) {
-            result.put("isDefined", false);
-            result.put("isEmpty", false);
-            result.put("isSingle", false);
-            result.put("isMultiple", false);
-
-            return result;
-        }
-
-        result.put("isDefined", true);
-        result.put("isEmpty", arguments.isEmpty());
-        result.put("isSingle", arguments.size() == 1);
-        result.put("isMultiple", arguments.size() > 1);
-        result.put("asParameters", makeParameterList(arguments));
-        result.put("asArguments", makeArgumentList(arguments));
-
-        if (arguments.size() == 1) {
-            Argument argument = arguments.iterator().next();
-
-            result.put("argument", argument);
-            result.put("type", argument.getType().getJavaType());
-        }
-        else {
-            result.put("arguments", arguments);
-        }
-
-        return result;
-    }
-
-    private String makeParameterList(Collection<Argument> arguments) {
-        if (arguments.isEmpty()) {
-            return "";
-        }
-
-        List<String> argumentStrings = new ArrayList<>();
-
-        for (Argument current : arguments) {
-            argumentStrings.add(current.toString());
-        }
-
-        return Joiner.on(", ").join(argumentStrings);
-    }
-
-    private String makeArgumentList(Collection<Argument> arguments) {
-        if (arguments.isEmpty()) {
-            return "";
-        }
-
-        List<String> argumentStrings = new ArrayList<>();
-
-        for (Argument current : arguments) {
-            argumentStrings.add(current.getName());
-        }
-
-        return Joiner.on(", ").join(argumentStrings);
     }
 
 }

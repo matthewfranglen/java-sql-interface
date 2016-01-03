@@ -23,7 +23,6 @@ public final class Statement extends AbstractStatement {
         return query(parameters.getTOne(), parameters.getITwo(), parameters.getFThree(), parameters.getTsFour());
     }
 
-
     public static final class Takes {
         private final java.lang.String tOne;
         private final java.lang.Long iTwo;

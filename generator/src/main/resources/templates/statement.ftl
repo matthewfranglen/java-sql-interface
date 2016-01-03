@@ -1,15 +1,15 @@
-<#if ! package.isDefault>
-package ${package.name};
+<#if ! name.inDefaultPackage>
+package ${name.package};
 </#if>
 
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import com.matthew.sql.handler.AbstractStatement;
 
-public final class ${name.short} extends AbstractStatement {
+public final class ${name.name} extends AbstractStatement {
 
     <@compress single_line=true>private static final String statement = "${statement}";</@compress>
 
-    public ${name.short}(NamedParameterJdbcTemplate template) {
+    public ${name.name}(NamedParameterJdbcTemplate template) {
         super(template);
     }
 
@@ -17,43 +17,60 @@ public final class ${name.short} extends AbstractStatement {
         return statement;
     }
 
-<#if takes.isDefined && returns.isDefined>
-    public List<${returns.type}> query(${takes.asParameters}) {
+<#if takes.defined && returns.defined>
+    public List<${returns.multiple?then("Returns", returns.first.type.javaType)}> query(${takes.parameters}) {
 
     }
 
-<#if takes.isMultiple>
-    public List<${returns.type}> query(${takes.type} parameters) {
-        return query(<#list takes.arguments as argument>parameters.get${argument.capitalizedName}()<#sep>, </#sep></#list>);
+<#if takes.multiple>
+    public List<${returns.multiple?then("Returns", returns.first.type.javaType)}> query(Takes parameters) {
+        return query(<#list takes.iterator() as argument>parameters.${argument.getterName}()<#sep>, </#sep></#list>);
     }
 </#if>
-<#elseif takes.isDefined>
+<#elseif takes.defined>
 
-<#elseif returns.isDefined>
+<#elseif returns.defined>
 
 </#if>
 
-<#list [takes, returns] as interface>
-<#if interface.isMultiple>
-
-    public static final class ${interface.type} {
-    <#list interface.arguments as argument>
+<#if takes.multiple>
+    public static final class Takes {
+    <#list takes.iterator() as argument>
         private final ${argument.type.javaType} ${argument.name};
     </#list>
 
-        public ${interface.type}(${interface.asParameters}) {
-        <#list interface.arguments as argument>
+        public Takes(${takes.parameters}) {
+        <#list takes.iterator() as argument>
             this.${argument.name} = ${argument.name};
         </#list>
         }
 
-    <#list interface.arguments as argument>
-        public ${argument.type.javaType} get${argument.capitalizedName}() {
+    <#list takes.iterator() as argument>
+        public ${argument.type.javaType} ${argument.getterName}() {
             return ${argument.name};
         }
     </#list>
     }
 </#if>
-</#list>
+
+<#if returns.multiple>
+    public static final class Returns {
+    <#list returns.iterator() as argument>
+        private final ${argument.type.javaType} ${argument.name};
+    </#list>
+
+        public Returns(${returns.parameters}) {
+        <#list returns.iterator() as argument>
+            this.${argument.name} = ${argument.name};
+        </#list>
+        }
+
+    <#list returns.iterator() as argument>
+        public ${argument.type.javaType} ${argument.getterName}() {
+            return ${argument.name};
+        }
+    </#list>
+    }
+</#if>
 
 }

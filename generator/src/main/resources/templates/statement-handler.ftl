@@ -11,8 +11,8 @@ public class SqlStatementHandler extends AbstractStatementHandler {
 
     <#list statements as statement>
 
-    public ${statement.name.full} make${statement.name.short}() {
-        return new ${statement.name.full}(getTemplate());
+    public ${statement.name.fullName} make${statement.name.name}() {
+        return new ${statement.name.fullName}(getTemplate());
     }
 
     </#list>
