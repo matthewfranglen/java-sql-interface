@@ -1,3 +1,4 @@
+<#import "argument-class.ftl" as argumentClass>
 <#if ! name.inDefaultPackage>
 package ${name.package};
 </#if>
@@ -33,25 +34,7 @@ public final class ${name.name} extends AbstractStatement {
 
 </#if>
 
-<#if takes.multiple>
-    public static final class Takes {
-    <#list takes.iterator() as argument>
-        private final ${argument.type.javaType} ${argument.name};
-    </#list>
-
-        public Takes(${takes.parameters}) {
-        <#list takes.iterator() as argument>
-            this.${argument.name} = ${argument.name};
-        </#list>
-        }
-
-    <#list takes.iterator() as argument>
-        public ${argument.type.javaType} ${argument.getterName}() {
-            return ${argument.name};
-        }
-    </#list>
-    }
-</#if>
+<@argumentClass.define takes "Takes"></@argumentClass.define>
 
 <#if returns.multiple>
     public static final class Returns {
