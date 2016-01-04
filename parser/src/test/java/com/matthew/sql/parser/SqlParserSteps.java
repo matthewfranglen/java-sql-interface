@@ -114,6 +114,11 @@ public class SqlParserSteps {
         assertEquals(representation, statement.getTakes().getFirst().toString());
     }
 
+    @Then("^the loaded statement taken argument list has a string representation of \"(.*)\"$")
+    public void thenTheLoadedStatementTakenArgumentListHasAStringRepresentationOf(String representation) {
+        assertEquals(representation, statement.getTakes().toString());
+    }
+
     @Then("^the loaded statement taken argument has a type of TEXT$")
     public void thenTheLoadedStatementTakenArgumentHasATypeOfText() {
         assertEquals(ArgumentType.TEXT, statement.getTakes().getFirst().getType());
@@ -197,6 +202,11 @@ public class SqlParserSteps {
     @Then("^the loaded statement returned argument has a string representation of \"(.*)\"$")
     public void thenTheLoadedStatementReturnedArgumentHasAStringRepresentationOf(String representation) {
         assertEquals(representation, statement.getReturns().getFirst().toString());
+    }
+
+    @Then("^the loaded statement returned argument list has a string representation of \"(.*)\"$")
+    public void thenTheLoadedStatementReturnedArgumentListHasAStringRepresentationOf(String representation) {
+        assertEquals(representation, statement.getReturns().toString());
     }
 
     @Then("^the loaded statement returned argument has a type of TEXT$")
