@@ -18,6 +18,10 @@ public class Argument {
         return "get" + getCapitalizedName();
     }
 
+    private String getCapitalizedName() {
+        return name.substring(0, 1).toUpperCase() + name.substring(1);
+    }
+
 	public ArgumentType getType() {
 		return type;
 	}
@@ -28,10 +32,6 @@ public class Argument {
 
     public String toString() {
         return getJavaType() + " " + getName();
-    }
-
-    private String getCapitalizedName() {
-        return name.substring(0, 1).toUpperCase() + name.substring(1);
     }
 
 }
