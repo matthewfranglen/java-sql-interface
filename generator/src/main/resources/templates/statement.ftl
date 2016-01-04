@@ -36,24 +36,6 @@ public final class ${name.name} extends AbstractStatement {
 
 <@argumentClass.define takes "Takes"></@argumentClass.define>
 
-<#if returns.multiple>
-    public static final class Returns {
-    <#list returns.iterator() as argument>
-        private final ${argument.type.javaType} ${argument.name};
-    </#list>
-
-        public Returns(${returns.parameters}) {
-        <#list returns.iterator() as argument>
-            this.${argument.name} = ${argument.name};
-        </#list>
-        }
-
-    <#list returns.iterator() as argument>
-        public ${argument.type.javaType} ${argument.getterName}() {
-            return ${argument.name};
-        }
-    </#list>
-    }
-</#if>
+<@argumentClass.define returns "Returns"></@argumentClass.define>
 
 }
