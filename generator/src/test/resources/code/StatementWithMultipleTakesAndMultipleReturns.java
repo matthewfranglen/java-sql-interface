@@ -39,15 +39,19 @@ public final class Statement extends AbstractStatement {
         public java.lang.String getTOne() {
             return tOne;
         }
+
         public java.lang.Long getITwo() {
             return iTwo;
         }
+
         public java.lang.Double getFThree() {
             return fThree;
         }
+
         public java.util.Date getTsFour() {
             return tsFour;
         }
+
     }
 
     public static final class Returns {
@@ -66,15 +70,19 @@ public final class Statement extends AbstractStatement {
         public java.lang.String getTOne() {
             return tOne;
         }
+
         public java.lang.Long getITwo() {
             return iTwo;
         }
+
         public java.lang.Double getFThree() {
             return fThree;
         }
+
         public java.util.Date getTsFour() {
             return tsFour;
         }
+
     }
 
 }

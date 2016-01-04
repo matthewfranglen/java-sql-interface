@@ -15,6 +15,7 @@
         public ${argument.type.javaType} ${argument.getterName}() {
             return ${argument.name};
         }
+
     </#list>
     }
 </#if>
