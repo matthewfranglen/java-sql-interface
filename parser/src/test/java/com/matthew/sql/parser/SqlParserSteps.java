@@ -229,6 +229,11 @@ public class SqlParserSteps {
         assertEquals(name, statement.getName().getName());
     }
 
+    @Then("^the loaded statement full name is \"(.*)\"$")
+    public void thenTheLoadedStatementFullNameIs(String fullName) {
+        assertEquals(fullName, statement.getName().getFullName());
+    }
+
     @Then("^the loaded statement package is \"(.*)\"$")
     public void thenTheLoadedStatementPackageIs(String _package) {
         assertEquals(_package, statement.getName().getPackage());
