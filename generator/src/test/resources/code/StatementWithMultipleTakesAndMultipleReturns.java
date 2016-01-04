@@ -24,6 +24,7 @@ public final class Statement extends AbstractStatement {
     }
 
     public static final class Takes {
+
         private final java.lang.String tOne;
         private final java.lang.Long iTwo;
         private final java.lang.Double fThree;
@@ -55,6 +56,7 @@ public final class Statement extends AbstractStatement {
     }
 
     public static final class Returns {
+
         private final java.lang.String tOne;
         private final java.lang.Long iTwo;
         private final java.lang.Double fThree;

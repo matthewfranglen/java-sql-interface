@@ -1,6 +1,7 @@
 <#macro define interface name>
 <#if interface.multiple>
     public static final class ${name} {
+
     <#list interface.iterator() as argument>
         private final ${argument.type.javaType} ${argument.name};
     </#list>
