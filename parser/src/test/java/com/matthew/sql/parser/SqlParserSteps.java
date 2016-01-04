@@ -99,6 +99,16 @@ public class SqlParserSteps {
         assertEquals(name, statement.getTakes().getFirst().getName());
     }
 
+    @Then("^the loaded statement taken argument has a getter name of \"(.*)\"$")
+    public void thenTheLoadedStatementTakenArgumentHasAGetterNameOf(String name) {
+        assertEquals(name, statement.getTakes().getFirst().getGetterName());
+    }
+
+    @Then("^the loaded statement taken argument has a java type of (.*)$")
+    public void thenTheLoadedStatementTakenArgumentHasAJavaTypeOf(String type) {
+        assertEquals(type, statement.getTakes().getFirst().getJavaType());
+    }
+
     @Then("^the loaded statement taken argument has a type of TEXT$")
     public void thenTheLoadedStatementTakenArgumentHasATypeOfText() {
         assertEquals(ArgumentType.TEXT, statement.getTakes().getFirst().getType());
@@ -197,11 +207,6 @@ public class SqlParserSteps {
     @Then("^the loaded statement returned argument has a type of WHOLE_NUMBER$")
     public void thenTheLoadedStatementReturnedArgumentHasATypeOfWholeNumber() {
         assertEquals(ArgumentType.WHOLE_NUMBER, statement.getReturns().getFirst().getType());
-    }
-
-    @Then("^the loaded statement taken argument has a java type of (.*)$")
-    public void thenTheLoadedStatementTakenArgumentHasAJavaTypeOf(String type) {
-        assertEquals(type, statement.getTakes().getFirst().getJavaType());
     }
 
     @Then("^the loaded statement body is \"(.*)\"$")
