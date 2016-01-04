@@ -3,6 +3,7 @@ package com.matthew.sql.statement;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import com.google.common.base.Strings;
@@ -18,7 +19,7 @@ public class SqlStatementBuilder {
     private boolean setReturns;
     private ArgumentList returns;
 
-    private ArgumentListBuilder current;
+    private Collection<Argument> encounteredArguments;
 
     public SqlStatementBuilder() {
         nameBuilder = new NameBuilder();
@@ -46,54 +47,44 @@ public class SqlStatementBuilder {
 
     public void setTakes(Collection<Argument> arguments) {
         checkState(! setTakes, "Encountered two takes definitions");
-        setTakes = true;
 
-        ArgumentListBuilder builder = new ArgumentListBuilder();
-        builder.addAll(arguments);
-        takes = builder.build();
+        setTakes = true;
+        takes = buildArgumentList(arguments);
     }
 
     public void setReturns(Collection<Argument> arguments) {
         checkState(! setReturns, "Encountered two returns definitions");
-        setReturns = true;
 
+        setReturns = true;
+        returns = buildArgumentList(arguments);
+    }
+
+    private ArgumentList buildArgumentList(Collection<Argument> arguments) {
         ArgumentListBuilder builder = new ArgumentListBuilder();
-        builder.addAll(arguments);
-        returns = builder.build();
+
+        if (arguments != null) {
+            builder.addAll(arguments);
+        }
+
+        return builder.build();
     }
 
     public void exitTakes() {
-        checkState(! setTakes, "Encountered two takes definitions");
-        setTakes = true;
-
-        if (current != null) {
-            takes = current.build();
-            current = null;
-        }
-        else {
-            takes = new ArgumentListBuilder().build();
-        }
+        setTakes(encounteredArguments);
+        encounteredArguments = null;
     }
 
     public void exitReturns() {
-        checkState(! setReturns, "Encountered two returns definitions");
-        setReturns = true;
-
-        if (current != null) {
-            returns = current.build();
-            current = null;
-        }
-        else {
-            returns = new ArgumentListBuilder().build();
-        }
+        setReturns(encounteredArguments);
+        encounteredArguments = null;
     }
 
     public void addArgument(Argument argument) {
-        if (current == null) {
-            current = new ArgumentListBuilder();
+        if (encounteredArguments == null) {
+            encounteredArguments = new ArrayList<>();
         }
 
-        current.add(argument);
+        encounteredArguments.add(argument);
     }
 
     public SqlStatement build() {
