@@ -19,7 +19,7 @@ public final class ${name.name} extends AbstractStatement {
     }
 
 <#if takes.defined && returns.defined>
-    public List<${returns.multiple?then("Returns", returns.first.type.javaType)}> query(${takes.parameters}) {
+    public List<${returns.multiple?then("Returns", returns.first.type.javaType)}> query(${takes}) {
 
     }
 

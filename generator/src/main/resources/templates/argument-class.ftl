@@ -6,7 +6,7 @@
         private final ${argument.type.javaType} ${argument.name};
     </#list>
 
-        public ${name}(${interface.parameters}) {
+        public ${name}(${interface}) {
         <#list interface.iterator() as argument>
             this.${argument.name} = ${argument.name};
         </#list>

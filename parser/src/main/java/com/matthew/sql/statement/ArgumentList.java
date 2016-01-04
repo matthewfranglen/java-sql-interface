@@ -49,7 +49,7 @@ public class ArgumentList implements Iterable<Argument> {
         return isDefined() && arguments.size() > 1;
     }
 
-    public String getParameters() {
+    public String toString() {
         return Joiner.on(", ").join(arguments);
     }
 
