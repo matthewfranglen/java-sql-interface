@@ -1,4 +1,5 @@
 <#import "argument-class.ftl" as argumentClass>
+<#import "query-methods.ftl" as queryMethods>
 <#if ! name.inDefaultPackage>
 package ${name.package};
 </#if>
@@ -17,6 +18,8 @@ public final class ${name.name} extends AbstractStatement {
     protected String getStatement() {
         return statement;
     }
+
+<@queryMethods.methods takes returns></@queryMethods.methods>
 
 <@argumentClass.define takes "Takes"></@argumentClass.define>
 
