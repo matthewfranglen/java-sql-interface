@@ -15,9 +15,6 @@ public final class Statement extends AbstractStatement {
         return statement;
     }
 
-    public List<java.util.Date> query(java.util.Date timestamp) {
-
-    }
 
 
 

@@ -15,9 +15,6 @@ public final class Statement extends AbstractStatement {
         return statement;
     }
 
-    public List<java.lang.Double> query(java.lang.Double number) {
-
-    }
 
 
 

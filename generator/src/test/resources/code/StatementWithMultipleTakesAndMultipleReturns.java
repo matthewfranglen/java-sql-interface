@@ -15,13 +15,7 @@ public final class Statement extends AbstractStatement {
         return statement;
     }
 
-    public List<Returns> query(java.lang.String tOne, java.lang.Long iTwo, java.lang.Double fThree, java.util.Date tsFour) {
 
-    }
-
-    public List<Returns> query(Takes parameters) {
-        return query(parameters.getTOne(), parameters.getITwo(), parameters.getFThree(), parameters.getTsFour());
-    }
 
     public static final class Takes {
 
