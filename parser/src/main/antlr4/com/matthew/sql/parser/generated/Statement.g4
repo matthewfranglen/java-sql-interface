@@ -65,6 +65,10 @@ invalid_type
 : CHAR+
 ;
 
+CHAR
+: ~(' ' | '\t' | '\r' | '\n')
+;
+
 SEPARATOR
 : ','
 ;
@@ -105,10 +109,6 @@ FRACTIONAL_NUMBER_TYPE
 
 TIMESTAMP_TYPE
 : 'Date'
-;
-
-CHAR
-: ~(' ' | '\t' | '\r' | '\n')
 ;
 
 WS
