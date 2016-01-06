@@ -1,19 +1,24 @@
 package statements;
 
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import com.matthew.sql.handler.AbstractStatement;
-
-public final class Statement extends AbstractStatement {
+public final class Statement {
 
     private static final String statement = "SELECT * FROM table LIMIT 1;";
 
-    public Statement(NamedParameterJdbcTemplate template) {
-        super(template);
+    private final org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate template;
+
+    public Statement(org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate template) {
+        this.template = template;
     }
 
     protected String getStatement() {
         return statement;
     }
+
+
+
+
+
+
 
 
 

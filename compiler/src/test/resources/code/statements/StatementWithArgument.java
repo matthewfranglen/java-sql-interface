@@ -1,14 +1,13 @@
 package statements;
 
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import com.matthew.sql.handler.AbstractStatement;
-
-public final class StatementWithArgument extends AbstractStatement {
+public final class StatementWithArgument {
 
     private static final String statement = "SELECT * FROM table LIMIT 1;";
 
-    public StatementWithArgument(NamedParameterJdbcTemplate template) {
-        super(template);
+    private final org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate template;
+
+    public StatementWithArgument(org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate template) {
+        this.template = template;
     }
 
     protected String getStatement() {
@@ -16,88 +15,130 @@ public final class StatementWithArgument extends AbstractStatement {
     }
 
 
-    public <T> T query(Map<String,?> paramMap, ResultSetExtractor<T> rse) {
+    public int[] batchUpdate(java.util.Map<String,?>[] batchValues) {
+        return template.batchUpdate(getStatement(), batchValues);
+    }
+
+    public int[] batchUpdate(org.springframework.jdbc.core.namedparam.SqlParameterSource[] batchArgs) {
+        return template.batchUpdate(getStatement(), batchArgs);
+    }
+
+
+
+    public <T> T execute(java.util.Map<String,?> paramMap, org.springframework.jdbc.core.PreparedStatementCallback<T> action) {
+        return template.execute(getStatement(), paramMap, action);
+    }
+
+    public <T> T execute(org.springframework.jdbc.core.PreparedStatementCallback<T> action) {
+        return template.execute(getStatement(), action);
+    }
+
+    public <T> T execute(org.springframework.jdbc.core.namedparam.SqlParameterSource paramSource, org.springframework.jdbc.core.PreparedStatementCallback<T> action) {
+        return template.execute(getStatement(), paramSource, action);
+    }
+
+
+
+    public <T> T query(java.util.Map<String,?> paramMap, org.springframework.jdbc.core.ResultSetExtractor<T> rse) {
         return template.query(getStatement(), paramMap, rse);
     }
 
-    public void query(Map<String,?> paramMap, RowCallbackHandler rch) {
+    public void query(java.util.Map<String,?> paramMap, org.springframework.jdbc.core.RowCallbackHandler rch) {
         template.query(getStatement(), paramMap, rch);
     }
 
-    public <T> List<T> query(Map<String,?> paramMap, RowMapper<T> rowMapper) {
+    public <T> java.util.List<T> query(java.util.Map<String,?> paramMap, org.springframework.jdbc.core.RowMapper<T> rowMapper) {
         return template.query(getStatement(), paramMap, rowMapper);
     }
 
-    public <T> T query(ResultSetExtractor<T> rse) {
+    public <T> T query(org.springframework.jdbc.core.ResultSetExtractor<T> rse) {
         return template.query(getStatement(), rse);
     }
 
-    public void query(RowCallbackHandler rch) {
+    public void query(org.springframework.jdbc.core.RowCallbackHandler rch) {
         template.query(getStatement(), rch);
     }
 
-    public <T> List<T> query(RowMapper<T> rowMapper) {
+    public <T> java.util.List<T> query(org.springframework.jdbc.core.RowMapper<T> rowMapper) {
         return template.query(getStatement(), rowMapper);
     }
 
-    public <T> T query(SqlParameterSource paramSource, ResultSetExtractor<T> rse) {
+    public <T> T query(org.springframework.jdbc.core.namedparam.SqlParameterSource paramSource, org.springframework.jdbc.core.ResultSetExtractor<T> rse) {
         return template.query(getStatement(), paramSource, rse);
     }
 
-    public void query(SqlParameterSource paramSource, RowCallbackHandler rch) {
+    public void query(org.springframework.jdbc.core.namedparam.SqlParameterSource paramSource, org.springframework.jdbc.core.RowCallbackHandler rch) {
         template.query(getStatement(), paramSource, rch);
     }
 
-    public <T> List<T> query(SqlParameterSource paramSource, RowMapper<T> rowMapper) {
+    public <T> java.util.List<T> query(org.springframework.jdbc.core.namedparam.SqlParameterSource paramSource, org.springframework.jdbc.core.RowMapper<T> rowMapper) {
         return template.query(getStatement(), paramSource, rowMapper);
     }
 
-    public List<Map<String,Object>> queryForList(Map<String,?> paramMap) {
+    public java.util.List<java.util.Map<String,Object>> queryForList(java.util.Map<String,?> paramMap) {
         return template.queryForList(getStatement(), paramMap);
     }
 
-    public <T> List<T> queryForList(Map<String,?> paramMap, Class<T> elementType) {
+    public <T> java.util.List<T> queryForList(java.util.Map<String,?> paramMap, Class<T> elementType) {
         return template.queryForList(getStatement(), paramMap, elementType);
     }
 
-    public List<Map<String,Object>> queryForList(SqlParameterSource paramSource) {
+    public java.util.List<java.util.Map<String,Object>> queryForList(org.springframework.jdbc.core.namedparam.SqlParameterSource paramSource) {
         return template.queryForList(getStatement(), paramSource);
     }
 
-    public <T> List<T> queryForList(SqlParameterSource paramSource, Class<T> elementType) {
+    public <T> java.util.List<T> queryForList(org.springframework.jdbc.core.namedparam.SqlParameterSource paramSource, Class<T> elementType) {
         return template.queryForList(getStatement(), paramSource, elementType);
     }
 
-    public Map<String,Object> queryForMap(Map<String,?> paramMap) {
+    public java.util.Map<String,Object> queryForMap(java.util.Map<String,?> paramMap) {
         return template.queryForMap(getStatement(), paramMap);
     }
 
-    public Map<String,Object> queryForMap(SqlParameterSource paramSource) {
+    public java.util.Map<String,Object> queryForMap(org.springframework.jdbc.core.namedparam.SqlParameterSource paramSource) {
         return template.queryForMap(getStatement(), paramSource);
     }
 
-    public <T> T queryForObject(Map<String,?> paramMap, Class<T> requiredType) {
+    public <T> T queryForObject(java.util.Map<String,?> paramMap, Class<T> requiredType) {
         return template.queryForObject(getStatement(), paramMap, requiredType);
     }
 
-    public <T> T queryForObject(Map<String,?> paramMap, RowMapper<T> rowMapper) {
+    public <T> T queryForObject(java.util.Map<String,?> paramMap, org.springframework.jdbc.core.RowMapper<T> rowMapper) {
         return template.queryForObject(getStatement(), paramMap, rowMapper);
     }
 
-    public <T> T queryForObject(SqlParameterSource paramSource, Class<T> requiredType) {
+    public <T> T queryForObject(org.springframework.jdbc.core.namedparam.SqlParameterSource paramSource, Class<T> requiredType) {
         return template.queryForObject(getStatement(), paramSource, requiredType);
     }
 
-    public <T> T queryForObject(SqlParameterSource paramSource, RowMapper<T> rowMapper) {
+    public <T> T queryForObject(org.springframework.jdbc.core.namedparam.SqlParameterSource paramSource, org.springframework.jdbc.core.RowMapper<T> rowMapper) {
         return template.queryForObject(getStatement(), paramSource, rowMapper);
     }
 
-    public SqlRowSet queryForRowSet(Map<String,?> paramMap) {
+    public org.springframework.jdbc.support.rowset.SqlRowSet queryForRowSet(java.util.Map<String,?> paramMap) {
         return template.queryForRowSet(getStatement(), paramMap);
     }
 
-    public SqlRowSet queryForRowSet(SqlParameterSource paramSource) {
+    public org.springframework.jdbc.support.rowset.SqlRowSet queryForRowSet(org.springframework.jdbc.core.namedparam.SqlParameterSource paramSource) {
         return template.queryForRowSet(getStatement(), paramSource);
+    }
+
+
+
+    public int update(java.util.Map<String,?> paramMap) {
+        return template.update(getStatement(), paramMap);
+    }
+
+    public int update(org.springframework.jdbc.core.namedparam.SqlParameterSource paramSource) {
+        return template.update(getStatement(), paramSource);
+    }
+
+    public int update(org.springframework.jdbc.core.namedparam.SqlParameterSource paramSource, org.springframework.jdbc.support.KeyHolder generatedKeyHolder) {
+        return template.update(getStatement(), paramSource, generatedKeyHolder);
+    }
+
+    public int update(org.springframework.jdbc.core.namedparam.SqlParameterSource paramSource, org.springframework.jdbc.support.KeyHolder generatedKeyHolder, String[] keyColumnNames) {
+        return template.update(getStatement(), paramSource, generatedKeyHolder, keyColumnNames);
     }
 
 
