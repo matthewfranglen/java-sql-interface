@@ -1,22 +1,4 @@
-<#macro argumentsToParameters takes>
-<#if takes.empty>
-    Map<String, ?> parameters = java.util.Collections.emptyMap();
-<#elseif takes.singular>
-    Map<String, ?> parameters = java.util.Collections.singletonMap("${takes.first.name}", ${takes.first.name});
-<#else>
-    Map<String, ?> parameters = new java.util.HashMap<>();
-    <#list takes.iterator() as argument>
-    parameters.put("${argument.name}", ${argument.name});
-    </#list>
-</#if>
-</#macro>
-
-<#macro instanceToParameters takes>
-    Map<String, ?> parameters = new java.util.HashMap<>();
-    <#list takes.iterator() as argument>
-    parameters.put("${argument.name}", takes.${argument.getterName}());
-    </#list>
-</#macro>
+<#import "util-methods.ftl" as utilMethods>
 
 <#macro methods takes returns>
 <#if takes.defined && returns.defined>
@@ -53,32 +35,32 @@
     <#else>
 
     public <T> T query(${takes}, ResultSetExtractor<T> rse) {
-        <@argumentsToParameters takes></@argumentsToParameters>
+        <@utilMethods.argumentsToParameters takes></@utilMethods.argumentsToParameters>
         return template.query(getStatement(), parameters, rse);
     }
 
     public void query(${takes}, RowCallbackHandler rch) {
-        <@argumentsToParameters takes></@argumentsToParameters>
+        <@utilMethods.argumentsToParameters takes></@utilMethods.argumentsToParameters>
         template.query(getStatement(), parameters, rch);
     }
 
     public <T> List<T> query(${takes}, RowMapper<T> rowMapper) {
-        <@argumentsToParameters takes></@argumentsToParameters>
+        <@utilMethods.argumentsToParameters takes></@utilMethods.argumentsToParameters>
         return template.query(getStatement(), parameters, rowMapper);
     }
 
     public <T> T queryForObject(${takes}, Class<T> requiredType) {
-        <@argumentsToParameters takes></@argumentsToParameters>
+        <@utilMethods.argumentsToParameters takes></@utilMethods.argumentsToParameters>
         return template.queryForObject(getStatement(), parameters, requiredType);
     }
 
     public <T> T queryForObject(${takes}, RowMapper<T> rowMapper) {
-        <@argumentsToParameters takes></@argumentsToParameters>
+        <@utilMethods.argumentsToParameters takes></@utilMethods.argumentsToParameters>
         return template.queryForObject(getStatement(), parameters, rowMapper);
     }
 
     public SqlRowSet queryForRowSet(${takes}) {
-        <@argumentsToParameters takes></@argumentsToParameters>
+        <@utilMethods.argumentsToParameters takes></@utilMethods.argumentsToParameters>
         return template.queryForRowSet(getStatement(), parameters);
     }
 
@@ -86,32 +68,32 @@
     <#if takes.multiple>
 
     public <T> T query(Takes takes, ResultSetExtractor<T> rse) {
-        <@instanceToParameters takes></@instanceToParameters>
+        <@utilMethods.instanceToParameters takes></@utilMethods.instanceToParameters>
         return template.query(getStatement(), parameters, rse);
     }
 
     public void query(Takes takes, RowCallbackHandler rch) {
-        <@instanceToParameters takes></@instanceToParameters>
+        <@utilMethods.instanceToParameters takes></@utilMethods.instanceToParameters>
         template.query(getStatement(), parameters, rch);
     }
 
     public <T> List<T> query(Takes takes, RowMapper<T> rowMapper) {
-        <@instanceToParameters takes></@instanceToParameters>
+        <@utilMethods.instanceToParameters takes></@utilMethods.instanceToParameters>
         return template.query(getStatement(), parameters, rowMapper);
     }
 
     public <T> T queryForObject(Takes takes, Class<T> requiredType) {
-        <@instanceToParameters takes></@instanceToParameters>
+        <@utilMethods.instanceToParameters takes></@utilMethods.instanceToParameters>
         return template.queryForObject(getStatement(), parameters, requiredType);
     }
 
     public <T> T queryForObject(Takes takes, RowMapper<T> rowMapper) {
-        <@instanceToParameters takes></@instanceToParameters>
+        <@utilMethods.instanceToParameters takes></@utilMethods.instanceToParameters>
         return template.queryForObject(getStatement(), parameters, rowMapper);
     }
 
     public SqlRowSet queryForRowSet(Takes takes) {
-        <@instanceToParameters takes></@instanceToParameters>
+        <@utilMethods.instanceToParameters takes></@utilMethods.instanceToParameters>
         return template.queryForRowSet(getStatement(), parameters);
     }
 
