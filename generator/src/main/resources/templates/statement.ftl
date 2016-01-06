@@ -7,16 +7,13 @@
 package ${name.package};
 </#if>
 
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import com.matthew.sql.handler.AbstractStatement;
-
 public final class ${name.name} {
 
     <@compress single_line=true>private static final String statement = "${statement}";</@compress>
 
     private final org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate template;
 
-    public ${name.name}(NamedParameterJdbcTemplate template) {
+    public ${name.name}(org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate template) {
         this.template = template;
     }
 
